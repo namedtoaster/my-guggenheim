@@ -350,53 +350,100 @@ def credit(d, ex, W, H):
 
 
 def card_wall_text(ex, accent, size=(1080, 1350)):
+    """The intro wall, whole, on two cards if it can be done at a readable size."""
+    for body in (33, 31, 29, 27):
+        cards = wall_cards(ex, accent, size, body)
+        if len(cards) <= 2:
+            return cards
+    return cards
+
+
+def wall_cards(ex, accent, size, body):
     W, H = size
-    c = Image.new("RGB", size, WALL)
-    d = ImageDraw.Draw(c)
     m = 96
-    y = 150
-    d.text((m, y), ex.get("kicker") or "Collection in Focus", font=font("medium", 40), fill=INK)
-    y += 60
-    tf = font("medium", 96)
-    lines = wrap(ex["title"], tf, W - 2 * m)
-    y = draw_lines(d, (m, y), lines, tf, accent, 104) + 50
-    statement = ex["statement"] if isinstance(ex["statement"], list) else [ex["statement"]]
-    bf = font("regular", 36)
-    room = (H - 210 - y) // 52
-    for para in statement:
-        if room <= 1:
-            break
-        lines = fit_sentences(para, bf, W - 2 * m, room, clip=False)
+    bf = font("regular", body)
+    lh = int(body * 1.45)
+    statement = ex["statement"] if isinstance(ex["statement"], list) else [p for p in ex["statement"].split("\n\n") if p.strip()]
+    # Every line of the statement, with None marking the gap between paragraphs.
+    lines = []
+    for i, para in enumerate(statement):
+        if i:
+            lines.append(None)
+        lines += wrap(para.replace("*", ""), bf, W - 2 * m)
+
+    cards = []
+    while lines or not cards:
+        c = Image.new("RGB", size, WALL)
+        d = ImageDraw.Draw(c)
+        if not cards:
+            y = 140
+            d.text((m, y), ex.get("kicker") or "Collection in Focus", font=font("medium", 40), fill=INK)
+            tf = font("medium", 96)
+            y = draw_lines(d, (m, y + 60), wrap(ex["title"], tf, W - 2 * m), tf, accent, 104) + 46
+        else:
+            d.text((m, 110), f"{ex['title']} (continued)", font=font("medium", 30), fill=SOFT_INK)
+            y = 190
+        limit = H - 200
+        while lines and y + lh <= limit:
+            line = lines.pop(0)
+            if line is None:
+                y += lh // 2
+                continue
+            d.text((m, y), line, font=bf, fill=INK)
+            y += lh
+        while lines and lines[0] is None:
+            lines.pop(0)
         if not lines:
-            break
-        y = draw_lines(d, (m, y), lines, bf, INK, 52) + 26
-        room -= len(lines) + 1
-    d.text((m, H - 140), tombstone_artist(ex.get("artist")), font=font("semibold", 30), fill=INK)
-    d.text((m, H - 98), "Collection of the artist", font=font("regular", 28), fill=SOFT_INK)
-    credit(d, ex, W, H)
-    return c
+            d.text((m, H - 140), tombstone_artist(ex.get("artist")), font=font("semibold", 30), fill=INK)
+            d.text((m, H - 98), "Collection of the artist", font=font("regular", 28), fill=SOFT_INK)
+        else:
+            d.text((W - m, H - 110), "continued", font=font("italic", 26), fill=SOFT_INK, anchor="ra")
+        credit(d, ex, W, H)
+        cards.append(c)
+    return cards
+
+
+# Photo share and body size to try, in order, until the whole label fits on the card.
+# The label is the point of the card, so the photo gives way before the text gets small.
+CARD_LAYOUTS = [(0.50, 28), (0.45, 28), (0.42, 27), (0.38, 26), (0.34, 25), (0.31, 24), (0.28, 23)]
 
 
 def card_work(ex, work, meta, photo, number, size=(1080, 1350)):
     W, H = size
+    m = 84
+    top = 76
+    bottom = H - 76 if credits_on(ex) else H - 48
+    title = work["title"].replace("*", "") + (f", {work['date']}" if work.get("date") else "")
+    paras = [p.replace("*", "").strip() for p in work["label"].split("\n\n") if p.strip()]
+
+    for frac, size_px in CARD_LAYOUTS:
+        bf = font("regular", size_px)
+        lh = int(size_px * 1.42)
+        head_f = font("semibold", size_px + 2)
+        title_f = font("italic", size_px + 2)
+        title_lines = clamp_lines(wrap(title, title_f, W - 2 * m), 2)
+        para_lines = [wrap(p, bf, W - 2 * m) for p in paras]
+        text_h = (lh + 6) + len(title_lines) * (lh + 2) + 18 + sum(len(pl) * lh for pl in para_lines) + (len(para_lines) - 1) * (lh // 2)
+        photo_h = int(H * frac)
+        if top + photo_h + 44 + text_h <= bottom:
+            break
+    else:  # even the smallest layout is too small: keep whole sentences, point to the gallery
+        room = (bottom - (top + photo_h + 44) - (lh + 6) - len(title_lines) * (lh + 2) - 18) // lh - 1
+        para_lines = [fit_sentences(" ".join(paras), bf, W - 2 * m, max(1, room), clip=True) + ["Full label in the gallery."]]
+
     c = Image.new("RGB", size, WALL)
     d = ImageDraw.Draw(c)
-    m = 96
-    pic = fit_inside(photo, (W - 2 * m, int(H * 0.56)))
-    px = (W - pic.width) // 2
-    py = 90 + (int(H * 0.56) - pic.height) // 2
-    paste_with_shadow(c, pic, (px, py))
-    y = 90 + int(H * 0.56) + 64
-    d.text((m, y), tombstone_artist(ex.get("artist")), font=font("semibold", 30), fill=INK)
-    y += 42
-    title = work["title"].replace("*", "")
-    tl = wrap(title + (f", {work['date']}" if work.get("date") else ""), font("italic", 30), W - 2 * m)
-    y = draw_lines(d, (m, y), clamp_lines(tl, 2), font("italic", 30), INK, 40) + 22
-    bf = font("regular", 29)
-    room = max(1, (H - 100 - y) // 42)
-    lines = fit_sentences(work["label"].replace("*", "").replace("\n\n", " "), bf, W - 2 * m, room)
-    draw_lines(d, (m, y), lines, bf, INK, 42)
-    d.text((W - m, 44), f"{number}/{len(ex['works'])}", font=font("regular", 24), fill=SOFT_INK, anchor="ra")
+    pic = fit_inside(photo, (W - 2 * m, photo_h))
+    paste_with_shadow(c, pic, ((W - pic.width) // 2, top + (photo_h - pic.height) // 2))
+    y = top + photo_h + 44
+    d.text((m, y), tombstone_artist(ex.get("artist")), font=head_f, fill=INK)
+    y += lh + 6
+    y = draw_lines(d, (m, y), title_lines, title_f, INK, lh + 2) + 18
+    for i, pl in enumerate(para_lines):
+        if i:
+            y += lh // 2
+        y = draw_lines(d, (m, y), pl, bf, INK, lh)
+    d.text((W - m, 36), f"{number}/{len(ex['works'])}", font=font("regular", 24), fill=SOFT_INK, anchor="ra")
     credit(d, ex, W, H)
     return c
 
@@ -508,11 +555,15 @@ def main():
     global WALL, INK, SOFT_INK
     WALL, INK, SOFT_INK = wall_colors(exhibition)
     accent = accent_color(exhibition)
-    cards = [("01-wall-text.png", card_wall_text(exhibition, accent))]
+    walls = card_wall_text(exhibition, accent)
+    cards = [(f"{i:02d}-wall-text.png", im) for i, im in enumerate(walls, 1)]
     for n, work in enumerate(exhibition["works"][: args.carousel], 1):
-        cards.append((f"{n + 1:02d}-{work['id']}.png", card_work(exhibition, work, meta[work["id"]], photos[work["id"]], n)))
+        cards.append((f"{len(cards) + 1:02d}-{work['id']}.png", card_work(exhibition, work, meta[work["id"]], photos[work["id"]], n)))
     if (exhibition.get("timeline") or {}).get("entries"):
         cards.append((f"{len(cards) + 1:02d}-timeline.png", card_timeline(exhibition, accent)))
+    if len(cards) > 20:
+        print(f"Note: {len(cards)} carousel cards. Instagram takes up to 20 in one post, so post the rest "
+              f"as a second carousel, or rebuild with --carousel {args.carousel - (len(cards) - 20)}.")
     cover_id = exhibition.get("cover") or exhibition["works"][0]["id"]
     for name, im in cards:
         im.save(share / name, optimize=True)

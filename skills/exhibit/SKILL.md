@@ -111,6 +111,8 @@ hosting (see [references/sharing.md](references/sharing.md)).
 ## Step 6: Check your work
 
 Open `share/01-wall-text.png` and two of the work cards with your image reading tool.
+The cards carry each label in full, so a very long label makes its photo small; trim
+labels over 250 words.
 Text should end on whole sentences and nothing should overlap. Then count: every
 label 150 to 250 words, the wall text 350 to 500. Short labels are the most common
 way a show falls flat. If a title runs long,

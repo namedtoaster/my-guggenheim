@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.1 (2026-10-12)
+
+The whole label, on the card.
+
+- Work cards now carry the full label. The photo gives way first, then the type
+  steps down, until every paragraph fits.
+- The intro wall is no longer cut to its first paragraph: it runs whole across two
+  cards, with "continued" between them.
+- A note when a carousel goes over Instagram's 20 cards.
+
 ## 0.5.0 (2026-10-12)
 
 Every share points back here.
