@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.1 (2026-10-12)
+
+- PRIVACY.md: My Guggenheim collects, stores, uploads and sells nothing, and says
+  plainly what it cannot promise (how Claude handles what you send it, and anything
+  you post).
+- New checks that keep the promise true: no networking code in the scripts, and no
+  gallery page that loads anything from the internet.
+
 ## 0.7.0 (2026-10-12)
 
 - `share/wall-texts.md`: every word of a show in hanging order (intro wall, room

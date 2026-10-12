@@ -17,7 +17,7 @@ cover and a short vertical film.
 The more random the photos, the better. A parking lot at sunset. A receipt. A blurry
 pigeon. A screenshot from 11:58 p.m.
 
-![Version](https://img.shields.io/badge/version-0.7.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757)
+![Version](https://img.shields.io/badge/version-0.7.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757) ![Privacy](https://img.shields.io/badge/your%20data-never%20collected-2e7d32)
 
 ![A carousel from the demo show: the wall text, two works and the timeline](docs/images/carousel.png)
 
@@ -130,12 +130,17 @@ Try the whole demo yourself: see [examples/README.md](examples/README.md).
 
 ## Your photos stay yours
 
-- Every image in the gallery and the cards is re-saved **without camera data**, so
-  no GPS position or device details travel with it.
-- Places are named at **city level at most**. Never a street, never "the artist's home".
-- The curator never guesses who people are and never comments on anyone's looks.
-- Nothing is uploaded anywhere. The scripts use Python and Pillow, with no network.
-- Your exhibits folder is ignored by git, so a fork never carries your photos.
+**My Guggenheim does not collect, store, upload or sell anything about you.** No
+server, no account, no analytics, no tracking.
+
+- The scripts run where you run them and contain no networking code. They work offline.
+- Your originals are never changed. Shared copies have camera data and GPS removed.
+- Places are named at city level at most. Faces and names can be blacked out first.
+- The gallery page loads nothing from the internet.
+- This repo never holds anyone's photos or personal details, and every commit is
+  checked to keep it that way.
+
+Read the whole promise, including what it can't cover, in [PRIVACY.md](PRIVACY.md).
 
 ## Want more motion?
 

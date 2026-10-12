@@ -161,6 +161,9 @@ movement, see [references/film.md](references/film.md), which explains handing t
 
 ## Never
 
+- Send a photo, or anything about the person, anywhere outside their own exhibit
+  folder and this conversation. No uploads, no web lookups of places or faces.
+
 - Write an exact location, a street or "the artist's home", even if you can tell.
 - Name or identify people in the photos unless the person names them.
 - Comment on anyone's body or looks, or make the person the butt of a joke.

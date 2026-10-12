@@ -11,6 +11,8 @@ What the scripts promise:
 - Every image they save is re-encoded without camera data (including GPS).
 - `manifest.json` keeps only a rough position (about 11 km), for naming a city.
 
+See [PRIVACY.md](PRIVACY.md) for the full privacy promise.
+
 This repo collects no telemetry, and it never holds anyone's personal photos, places,
 faces or contact details. `scripts/validate.py` checks every commit and every pull
 request for them.

@@ -109,6 +109,12 @@ for path in repo_files():
                 if not any(ok in addr for ok in EMAIL_OK):
                     errors.append(f"{rel}:{n}: an email address ({addr}); leave personal contact details out")
 
+# No network, ever: the scripts must not be able to send anything anywhere.
+NETWORK = re.compile(r"^\s*(import|from)\s+(urllib|requests|http\.client|httpx|aiohttp|socket|ftplib|smtplib)\b", re.M)
+for path in (ROOT / "skills").rglob("*.py"):
+    if NETWORK.search(path.read_text(encoding="utf-8")):
+        errors.append(f"{path.relative_to(ROOT)}: imports a networking module; the scripts must work offline and send nothing")
+
 # Demo build
 if "--quick" not in sys.argv:
     scripts = ROOT / "skills" / "exhibit" / "scripts"
@@ -132,6 +138,10 @@ if "--quick" not in sys.argv:
             errors.append("demo caption is missing the project link")
         if "Late Suburban Currents" not in html or html.count('class="room') != 6:
             errors.append("demo gallery is missing its title or rooms")
+        # The gallery page must load nothing from anywhere: no fonts, scripts, images or trackers.
+        loads = re.findall(r'(?:src|srcset)="https?:|<link[^>]+href="https?:|url\(\s*["\']?https?:|@import|fetch\(|XMLHttpRequest|sendBeacon|new Image\(', html)
+        if loads:
+            errors.append(f"demo gallery loads something from the internet: {loads}")
         if "Late Suburban Currents" not in (demo / "share" / "wall-texts.md").read_text():
             errors.append("demo wall-texts.md is missing")
         if not list((demo / "share").glob("film-square.*")):
