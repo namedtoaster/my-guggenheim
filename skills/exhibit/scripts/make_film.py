@@ -22,6 +22,7 @@ import sys
 from pathlib import Path
 
 from common import (
+    redact,
     REPO_SHORT, credits_on,
     accent_color, wall_colors,
     INK, SOFT_INK, WALL, Image, ImageDraw, clamp_lines, draw_lines, first_sentences, fit_inside,
@@ -261,7 +262,7 @@ def main():
 
     scenes = [scene_title(ex, accent, W, H, args.format)]
     for n, work in enumerate(works, 1):
-        photo = open_photo(folder / meta[work["id"]]["file"])
+        photo = redact(open_photo(folder / meta[work["id"]]["file"]), work.get("redact"))
         photo.thumbnail((1800, 1800))
         scenes.append(scene_work(ex, work, photo, n, len(works), W, H, args.format, args.seconds))
     if (ex.get("timeline") or {}).get("entries"):

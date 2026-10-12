@@ -8,6 +8,8 @@
   - every SKILL.md stays under 500 lines
   - the plugin and marketplace JSON files parse
   - no long dashes (em or en) in Markdown, JSON or Python files git tracks
+  - privacy: no personal photos, videos or zips outside the known folders, no
+    location data in any image, no places in any manifest, no email addresses
   - the demo photos build into a gallery, share cards and a film
 
 Only the demo build writes files, all of them under examples/demo/ (ignored by git).
@@ -74,6 +76,38 @@ for path in repo_files():
     for n, line in enumerate(path.read_text(encoding="utf-8", errors="ignore").splitlines(), 1):
         if DASHES.search(line):
             errors.append(f"{path.relative_to(ROOT)}:{n}: long dash, use a comma, period or parentheses")
+
+# Privacy. Nothing about a real person may ever be committed: no personal photos,
+# no location data, no places, no email addresses. Runs on every commit (see
+# scripts/hooks/pre-commit) and in CI.
+MEDIA = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp", ".gif", ".tif", ".tiff", ".bmp",
+         ".mov", ".mp4", ".m4v", ".avi", ".zip"}
+# Only these folders may hold images, and everything in them is drawn, not photographed.
+MEDIA_ALLOWED = ("docs/images/", "skills/exhibit/assets/")
+EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+EMAIL_OK = ("noreply@anthropic.com", "@users.noreply.github.com", "@example.com")
+for path in repo_files():
+    rel = path.relative_to(ROOT).as_posix()
+    if path.suffix.lower() in MEDIA:
+        if not rel.startswith(MEDIA_ALLOWED):
+            errors.append(f"{rel}: photos, videos and zips can't be committed outside {', '.join(MEDIA_ALLOWED)} (personal photos stay in exhibits/, which git ignores)")
+            continue
+        try:
+            from PIL import Image
+            with Image.open(path) as im:
+                if im.getexif().get_ifd(0x8825):
+                    errors.append(f"{rel}: carries GPS location data; re-save it without camera data")
+        except Exception:
+            pass
+    if path.suffix == ".json":
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        if re.search(r'"rough_place"\s*:\s*\{', text) or re.search(r'"lat"\s*:', text):
+            errors.append(f"{rel}: holds a place (rough_place or lat/lon); manifests with places stay in exhibits/")
+    if path.suffix in {".md", ".json", ".py", ".yml", ".html", ".txt"}:
+        for n, line in enumerate(path.read_text(encoding="utf-8", errors="ignore").splitlines(), 1):
+            for addr in EMAIL.findall(line):
+                if not any(ok in addr for ok in EMAIL_OK):
+                    errors.append(f"{rel}:{n}: an email address ({addr}); leave personal contact details out")
 
 # Demo build
 if "--quick" not in sys.argv:

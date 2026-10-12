@@ -9,3 +9,14 @@ dist/
 __pycache__/
 .DS_Store
 examples/demo/photos/
+# Personal media never belongs in the repo, wherever it lands.
+*.heic
+*.HEIC
+*.heif
+*.mov
+*.MOV
+*.mp4
+*.zip
+**/originals/
+**/stills/
+**/previews/

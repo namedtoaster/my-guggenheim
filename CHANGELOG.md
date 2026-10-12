@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 (2026-10-12)
+
+Nothing personal, ever, in the repo.
+
+- `redact` in `exhibition.json`: black boxes over faces and personal details, drawn into
+  the gallery, every card and the film. The skill checks every photo for them before a
+  show is shared.
+- Privacy checks in `scripts/validate.py`: no photos, videos or zips outside the drawn
+  demo folders, no location data in images, no places in JSON, no email addresses.
+  They run before every commit (`scripts/hooks/pre-commit`, switched on for Claude
+  sessions by `.claude/settings.json`) and in CI.
+- `.gitignore` keeps HEIC, video, zips and photo folders out wherever they land.
+
 ## 0.5.1 (2026-10-12)
 
 The whole label, on the card.

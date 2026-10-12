@@ -1,0 +1,5 @@
+#!/bin/sh
+# Runs the quick checks, including privacy, before every commit, so no personal
+# photo, place or contact detail can be committed by accident.
+# Turn it on once per clone:  git config core.hooksPath scripts/hooks
+exec python3 scripts/validate.py --quick

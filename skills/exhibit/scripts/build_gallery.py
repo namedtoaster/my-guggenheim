@@ -26,6 +26,7 @@ import sys
 from pathlib import Path
 
 from common import (
+    redact,
     CREDIT_LINE, REPO_URL, credits_on,
     accent_color, wall_colors,
     ACCENT, INK, SOFT_INK, WALL, Image, ImageDraw, clamp_lines, draw_lines, first_sentences, fit_sentences,
@@ -537,7 +538,7 @@ def main():
     photos, srcs, thumbs = {}, {}, {}
     for work in exhibition["works"]:
         wid = work["id"]
-        photo = open_photo(folder / meta[wid]["file"])
+        photo = redact(open_photo(folder / meta[wid]["file"]), work.get("redact"))
         photos[wid] = photo
         big = jpeg_bytes(web_copy(photo, args.image_size))
         small = jpeg_bytes(web_copy(photo, 200), quality=75)

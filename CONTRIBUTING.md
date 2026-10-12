@@ -33,6 +33,16 @@ without making anyone's photos less private.
 - Never commit personal photos, including in issues. The demo photos are drawn by
   `examples/make_demo_photos.py`.
 
+## Privacy
+
+Nothing about a real person goes in this repo: no personal photos, videos or zips,
+no places or coordinates, no faces, no email addresses. Turn on the check that runs
+before every commit, once per clone:
+
+```
+git config core.hooksPath scripts/hooks
+```
+
 ## Checks
 
 Run `python3 scripts/validate.py` before opening a pull request. It checks the skill,

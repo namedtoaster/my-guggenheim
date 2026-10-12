@@ -59,6 +59,7 @@ script checks it and says exactly what to fix.
 | `works[].date`, `medium`, `credit` | no | Credit defaults to "Collection of the artist". Dimensions come from the photo |
 | `timeline` | no | Leave it out for a show without dates. `works` in an entry shows thumbnails |
 | `timeline.entries[].room_text` | no | Opens a room in the gallery before that period's first work. Use it whenever the works hang in timeline order |
+| `works[].redact` | no | Black boxes over faces and personal details, as `[[left, top, right, bottom], ...]` in the photo's own upright pixels. Applied to the page, cards and film |
 | `works[].accession` | no | The small number under the credit line. Defaults to the year and position |
 | `visitor_note` | no | The closing line |
 | `share.caption`, `share.hashtags` | no | Written to `share/caption.txt`. `#MyGuggenheim` is always added |

@@ -229,3 +229,16 @@ def accent_color(ex):
 def credits_on(ex):
     """Shared files carry a small line about the project unless the show turns it off."""
     return (ex.get("share") or {}).get("credit", True) is not False
+
+
+def redact(im, boxes):
+    """Black out each [left, top, right, bottom] box, given in the photo's own pixels
+    (as it appears upright). Used for faces and personal details before sharing."""
+    if not boxes:
+        return im
+    im = im.copy()
+    d = ImageDraw.Draw(im)
+    for box in boxes:
+        x0, y0, x1, y1 = (int(v) for v in box)
+        d.rectangle((min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)), fill=(0, 0, 0))
+    return im
