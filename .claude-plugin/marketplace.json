@@ -1,0 +1,15 @@
+{
+  "name": "my-guggenheim",
+  "description": "My Guggenheim: your camera roll, curated like a museum.",
+  "owner": {
+    "name": "Dave Campbell",
+    "url": "https://github.com/namedtoaster"
+  },
+  "plugins": [
+    {
+      "name": "my-guggenheim",
+      "source": "./",
+      "description": "/exhibit turns any photos into a museum show: wall texts, an Artist's Life timeline from the photo metadata, a gallery page, a carousel, a story cover and a vertical video."
+    }
+  ]
+}

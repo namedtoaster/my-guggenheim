@@ -1,0 +1,11 @@
+# Your exhibitions stay on your machine unless you choose otherwise.
+exhibits/
+# Built outputs of the demo; rebuild with the commands in examples/README.md.
+examples/demo/manifest.json
+examples/demo/previews/
+examples/demo/gallery/
+examples/demo/share/
+dist/
+__pycache__/
+.DS_Store
+examples/demo/photos/

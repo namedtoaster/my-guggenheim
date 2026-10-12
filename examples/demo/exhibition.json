@@ -1,0 +1,79 @@
+{
+  "kicker": "Collection in Focus",
+  "title": "Late Suburban Currents",
+  "accent": "#1868c4",
+  "artist": { "name": "A. Demo", "born": "1994" },
+  "statement": [
+    "The vernacular photographers of the early twenty-first century, working almost entirely from the telephone in their pocket, paved the way for an emerging coterie of image makers who wished to push the limits of documentation beyond the merely useful. They endeavored to infuse the ordinary with a transcendent spirit, photographing what was in front of them before it went cold, flew away or was thrown out.",
+    "Between 2019 and 2026 the artist moved between New York and Chicago, and the work moves with them: from the warm, orange-leaning light of the early pictures to the cooler blues of a window in March, and finally to a screen glowing at 11:58 p.m. Recurring subjects include beverages, sky and evidence of purchase. This exhibition, like many before it, may assign more intention to a receipt than a receipt can bear.",
+    "Drawn from the artist's camera roll, *Late Suburban Currents* explores a dynamic period of interchange between the planned and the accidental, when an artist once again tested the possibilities of pointing a phone at something and pressing the button."
+  ],
+  "cover": "img-parking-lot-sunset",
+  "works": [
+    {
+      "id": "img-parking-lot-sunset",
+      "title": "Study for a Parking Lot",
+      "date": "June 2019",
+      "medium": "Digital photograph (iPhone 8), taken at 8:41 p.m.",
+      "label": "Made on the longest day of the year, this early work finds the artist already at ease with the grand subject of the American evening. A sun the color of apricot sinks behind a single streetlight, which stands in for the vertical figure of classical landscape. The painted lines of the lot recede toward the horizon with a confidence Renaissance perspective would recognize.\n\nNobody, it should be said, was parking.",
+      "film_line": "A sun the color of apricot, a single streetlight, and nobody parking.",
+      "alt": "An orange and purple sunset over an empty parking lot with one streetlight."
+    },
+    {
+      "id": "img-cold-coffee",
+      "title": "Self Portrait as a Cold Coffee",
+      "date": "November 2019",
+      "medium": "Digital photograph (iPhone 8), taken at 8:12 a.m.",
+      "label": "A cup, still full, photographed at 8:12 a.m. and never finished. The artist centers it with the confidence of a still life painter, letting the warm browns of the counter rise around it like a frame. Made in the first autumn of what the chronology calls the Early Period, it is one of several works in which the artist documents a plan rather than an event. The coffee was meant to be drunk. The picture was taken instead.",
+      "film_line": "The coffee was meant to be drunk. The picture was taken instead.",
+      "alt": "A full cup of coffee seen from above on a brown counter."
+    },
+    {
+      "id": "pxl-20220314-172233",
+      "title": "Window, Chicago (March)",
+      "date": "March 2022",
+      "medium": "Digital photograph (Pixel 6)",
+      "label": "The artist's arrival in Chicago is announced by a change of palette. The orange of the New York years gives way to a pale, uncertain blue, divided by the dark cross of a window frame into four equal skies. Clouds drift across each pane as if unaware of the grid imposed on them. Critics have read the work as a meditation on staying inside. The artist has not commented, possibly because they were inside.",
+      "alt": "A blue sky with small clouds seen through a dark window frame divided into four panes."
+    },
+    {
+      "id": "img-receipt",
+      "title": "Untitled (Receipt)",
+      "date": "August 2022",
+      "medium": "Digital photograph (Pixel 6)",
+      "label": "A slip of thermal paper floats on a dark ground, slightly askew, its lines of type softened into pure rhythm. Long dismissed as a document, the receipt is here returned to its true condition as an abstract composition of horizontal bands. Whether it was photographed for a reimbursement, a return or a dispute, the archive does not say. The museum chooses to believe it was for this.",
+      "alt": "A white paper receipt with lines of faint print, lying at an angle on a dark surface."
+    },
+    {
+      "id": "screenshot-2024-01-03-at-23-58-10",
+      "title": "Composition with Blue Notification",
+      "date": "January 2024",
+      "medium": "Screenshot, found digital material, captured at 11:58 p.m.",
+      "label": "Two minutes before midnight, the artist abandons the camera entirely and turns to the screen itself. Rounded grey and blue forms stack in a strict vertical order that recalls Mondrian by way of a group chat. The text has been lost to time and to the curator's discretion. What remains is the shape of a conversation, and the late hour, which says enough.",
+      "alt": "A phone screenshot of alternating blue and grey rounded message bubbles."
+    },
+    {
+      "id": "img-pigeon-maybe",
+      "title": "Pigeon, Possibly",
+      "date": "October 2026",
+      "medium": "Digital photograph (iPhone 15)",
+      "label": "The most recent work in the collection is also its most contested. A grey form, softened almost to vapor, holds still for exactly as long as the shutter needs and not a moment longer. Its orange eye is the only point of focus in the picture. Scholars agree it is a bird. Beyond that, consensus collapses. In the artist's late style, the subject is less important than the attempt.",
+      "film_line": "Scholars agree it is a bird. Beyond that, consensus collapses.",
+      "alt": "A very blurry grey bird, probably a pigeon, against a grey background."
+    }
+  ],
+  "timeline": {
+    "title": "The Artist's Life",
+    "entries": [
+      { "when": "2019", "heading": "Early Period: New York", "text": "The artist's first surviving works are made in New York on an iPhone 8. Warm light, empty lots and unfinished beverages establish the concerns of a lifetime.", "works": ["img-parking-lot-sunset", "img-cold-coffee"] },
+      { "when": "2022", "heading": "The Chicago Years", "text": "A move west brings a cooler palette and a new camera. The artist begins to photograph paperwork. Scholars disagree on whether this was a phase.", "works": ["pxl-20220314-172233", "img-receipt"] },
+      { "when": "2024", "heading": "The Screenshot Period", "text": "The camera is set aside for the screen. Work from this period is made almost exclusively after 11 p.m.", "works": ["screenshot-2024-01-03-at-23-58-10"] },
+      { "when": "2026", "heading": "Late Style", "text": "Back in New York, the artist returns to the street and to the bird. The work grows looser, faster and harder to identify.", "works": ["img-pigeon-maybe"] }
+    ]
+  },
+  "visitor_note": "You do not have to read everything. Look at what you like. Get what you get.",
+  "share": {
+    "caption": "Now on view: Late Suburban Currents. Six works from the collection of the artist, 2019 to 2026. You do not have to read everything.",
+    "hashtags": ["#MyGuggenheim", "#CollectionInFocus", "#LateSuburbanCurrents"]
+  }
+}
