@@ -120,7 +120,9 @@ name an artist's periods: "Early Period", "The Chicago Years", "The Blue Period"
 year, said with a straight face). Each entry is one to three sentences, built only
 from the photos, the data and what the person told you. Playful uncertainty is
 allowed and very museum: "Scholars disagree on what happened in 2021." The short
-`text` goes on the timeline; the longer `room_text` opens the room.
+`text` goes on the timeline; the longer `room_text` opens the room. Begin `text`
+with a sentence of six words or fewer: the timeline card and the film show only the
+sentences that fit on one line.
 
 ### The visitor note
 
