@@ -1,0 +1,43 @@
+name: My story
+description: Share a museum story, or the story of an exhibition you made here
+title: "Story: "
+labels: [story]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing. Stories may be added to STORIES.md, signed only with the
+        name you give below. Please leave out other people's names, addresses and
+        anything you would not want public. Do not attach personal photos.
+  - type: input
+    id: name
+    attributes:
+      label: How should we sign it?
+      description: A first name, initials, a handle, or "Anonymous".
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of story is it?
+      options:
+        - A museum I remember
+        - How I used to look at art, and how I do now
+        - The exhibition I made with My Guggenheim
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: Your story
+      description: As long or as short as you like. A favourite wall text from your show is welcome too.
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Permission
+      options:
+        - label: It's fine to add this story to STORIES.md, lightly edited for length.
+          required: true

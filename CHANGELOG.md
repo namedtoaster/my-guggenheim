@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0 (2026-10-12)
+
+Any mood.
+
+- Moods replace the four tones: Museum, Existential, Retrospective, Deadpan, Tender,
+  Romantic, Noir, Manifesto, Natural history, Far future and For kids, plus any mood
+  asked for in the person's own words. Each sets the curator's sensibility, the
+  touchstones and the walls.
+- `walls` in `exhibition.json`: white, grey, black or any color, carried through the
+  gallery, the cards and the film. Title colors lift themselves on dark walls.
+- A philosophy page, a stories page, and a "My story" form for sharing yours.
+
 ## 0.3.0 (2026-10-12)
 
 Send a zip.

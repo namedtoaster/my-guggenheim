@@ -17,7 +17,7 @@ cover and a short vertical film.
 The more random the photos, the better. A parking lot at sunset. A receipt. A blurry
 pigeon. A screenshot from 11:58 p.m.
 
-![Version](https://img.shields.io/badge/version-0.3.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757)
+![Version](https://img.shields.io/badge/version-0.4.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757)
 
 ![A carousel from the demo show: the wall text, two works and the timeline](docs/images/carousel.png)
 
@@ -107,8 +107,12 @@ npx skills add namedtoaster/my-guggenheim
    your Early Period, the Chicago Years, the Screenshot Period, Late Style.
 4. **It builds** the gallery, the cards and the film, and checks its own work.
 
-Tones: **Museum** (the default), **Retrospective** (maximum reverence), **Deadpan**,
-and **Tender** for photos of someone or something you miss.
+**Pick a mood, any mood.** Museum is the default. Ask for **Existential** (black walls,
+Rothko, Camus, gently withheld answers), **Noir**, **Tender**, **Deadpan**, **Romantic**,
+**Far future** (a museum in 3026 misreading your phone), **For kids**, or anything in your
+own words: "like a nature documentary", "my grandmother wrote it", "sad but funny".
+The mood changes the writing, the art history it reaches for, and even the color of
+the walls.
 
 ## A label from the demo
 
@@ -145,6 +149,11 @@ Post your show with **#MyGuggenheim**, or share your favourite wall text in
 curator ever says something unkind, wrong or too revealing,
 [tell us](https://github.com/namedtoaster/my-guggenheim/issues/new?template=the-curator-said.md)
 and the voice guide gets better for everyone.
+
+## Why I made this
+
+Read the [philosophy](PHILOSOPHY.md), then [share your own museum story](https://github.com/namedtoaster/my-guggenheim/issues/new?template=my-story.yml).
+The best ones go in [STORIES.md](STORIES.md).
 
 ## Contributing
 

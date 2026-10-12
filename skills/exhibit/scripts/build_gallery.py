@@ -25,6 +25,7 @@ import sys
 from pathlib import Path
 
 from common import (
+    accent_color, wall_colors,
     ACCENT, INK, SOFT_INK, WALL, Image, ImageDraw, clamp_lines, draw_lines, first_sentences, fit_sentences,
     fit_inside, font, hex_to_rgb, load_json, open_photo, tombstone_artist, wrap,
 )
@@ -74,6 +75,20 @@ def web_copy(im, long_side):
 
 # ---------------------------------------------------------------- page
 
+# White walls follow the viewer's light or dark setting. Shows that choose their
+# own walls (a mood asking for a black box room, say) keep them in both.
+WHITE_WALL_CSS = """:root {
+  --wall: #efeeea; --ink: #1c1c1c; --soft: #5c5c5c; --rule: #d9d7d0; --accent: ACCENT;
+  --shadow: 0 1px 2px rgba(0,0,0,.08), 0 18px 40px -12px rgba(0,0,0,.28);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --wall: #1d1d1b; --ink: #eceae4; --soft: #a5a39c; --rule: #3a3936;
+    --shadow: 0 18px 40px -12px rgba(0,0,0,.7); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --wall: #1d1d1b; --ink: #eceae4; --soft: #a5a39c; --rule: #3a3936;
+  --shadow: 0 18px 40px -12px rgba(0,0,0,.7); color-scheme: dark; }"""
+
 def inline(text):
     """Escape text, then allow *italics* for titles of works."""
     out = html.escape(text)
@@ -92,7 +107,9 @@ def dimensions(meta):
 
 def build_page(ex, manifest, srcs, thumbs):
     meta = {w["id"]: w for w in manifest["works"]}
-    accent = "#%02x%02x%02x" % hex_to_rgb(ex.get("accent"))
+    accent = "#%02x%02x%02x" % accent_color(ex)
+    wall, ink, soft = ("#%02x%02x%02x" % c for c in wall_colors(ex))
+    custom_walls = (ex.get("walls") or "white").strip().lower() != "white"
     artist = ex.get("artist") or {}
     artist_line = html.escape(tombstone_artist(artist))
     kicker = html.escape(ex.get("kicker") or "Collection in Focus")
@@ -164,6 +181,14 @@ def build_page(ex, manifest, srcs, thumbs):
     description = html.escape(first_sentences(" ".join(ex["statement"]) if isinstance(ex["statement"], list) else ex["statement"], 180))
     share_text = html.escape(f'{ex["title"]}, an exhibition by {artist.get("name") or "me"}')
 
+    if custom_walls:
+        dark = wall_colors(ex)[1][0] > 128
+        wall_css = (f":root {{ --wall: {wall}; --ink: {ink}; --soft: {soft}; --rule: {'#3a3936' if dark else '#bdbbb4'}; "
+                    f"--accent: {accent}; --shadow: 0 18px 40px -12px rgba(0,0,0,{'.7' if dark else '.3'}); "
+                    f"color-scheme: {'dark' if dark else 'light'}; }}")
+    else:
+        wall_css = WHITE_WALL_CSS.replace("ACCENT", accent)
+
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -175,17 +200,7 @@ def build_page(ex, manifest, srcs, thumbs):
 <meta property="og:description" content="{description}">
 <meta name="generator" content="My Guggenheim">
 <style>
-:root {{
-  --wall: #efeeea; --ink: #1c1c1c; --soft: #5c5c5c; --rule: #d9d7d0; --accent: {accent};
-  --shadow: 0 1px 2px rgba(0,0,0,.08), 0 18px 40px -12px rgba(0,0,0,.28);
-  color-scheme: light;
-}}
-@media (prefers-color-scheme: dark) {{
-  :root:not([data-theme="light"]) {{ --wall: #1d1d1b; --ink: #eceae4; --soft: #a5a39c; --rule: #3a3936;
-    --shadow: 0 18px 40px -12px rgba(0,0,0,.7); color-scheme: dark; }}
-}}
-:root[data-theme="dark"] {{ --wall: #1d1d1b; --ink: #eceae4; --soft: #a5a39c; --rule: #3a3936;
-  --shadow: 0 18px 40px -12px rgba(0,0,0,.7); color-scheme: dark; }}
+{wall_css}
 * {{ box-sizing: border-box; }}
 html {{ scroll-behavior: smooth; }}
 body {{ margin: 0; background: var(--wall); color: var(--ink);
@@ -434,7 +449,9 @@ def main():
     page = build_page(exhibition, manifest, srcs, thumbs)
     (gallery / "index.html").write_text(page, encoding="utf-8")
 
-    accent = hex_to_rgb(exhibition.get("accent"))
+    global WALL, INK, SOFT_INK
+    WALL, INK, SOFT_INK = wall_colors(exhibition)
+    accent = accent_color(exhibition)
     cards = [("01-wall-text.png", card_wall_text(exhibition, accent))]
     for n, work in enumerate(exhibition["works"][: args.carousel], 1):
         cards.append((f"{n + 1:02d}-{work['id']}.png", card_work(exhibition, work, meta[work["id"]], photos[work["id"]], n)))

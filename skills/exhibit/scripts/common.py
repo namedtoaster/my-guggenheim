@@ -186,3 +186,37 @@ def fit_sentences(text, fnt, max_width, max_lines, clip=True):
     if best:
         return best
     return clamp_lines(wrap(text, fnt, max_width), max_lines) if clip else []
+
+
+# Wall colors for the gallery, cards and film. A show's mood can ask for darker
+# walls: "black" for a black box room, "grey" for a quieter one, or any hex color.
+WALLS = {
+    "white": (WALL, INK, SOFT_INK),
+    "grey": ((206, 205, 200), (24, 24, 24), (72, 72, 70)),
+    "black": ((21, 21, 20), (236, 234, 228), (158, 156, 150)),
+}
+
+
+def wall_colors(ex):
+    """(wall, ink, soft ink) for an exhibition, from its "walls" field."""
+    walls = (ex.get("walls") or "white").strip().lower()
+    if walls in WALLS:
+        return WALLS[walls]
+    wall = hex_to_rgb(walls, default=None)
+    if wall is None:
+        return WALLS["white"]
+    light = (0.2126 * wall[0] + 0.7152 * wall[1] + 0.0722 * wall[2]) / 255
+    return (wall, INK, SOFT_INK) if light > 0.5 else (wall, WALLS["black"][1], WALLS["black"][2])
+
+
+def accent_color(ex):
+    """The title color, lifted for dark walls so it stays readable."""
+    wall = wall_colors(ex)[0]
+    dark = (0.2126 * wall[0] + 0.7152 * wall[1] + 0.0722 * wall[2]) / 255 < 0.5
+    if not ex.get("accent"):
+        return (110, 166, 255) if dark else ACCENT
+    color = hex_to_rgb(ex["accent"])
+    light = (0.2126 * color[0] + 0.7152 * color[1] + 0.0722 * color[2]) / 255
+    if dark and light < 0.35:  # mix toward white until it reads on a dark wall
+        color = tuple(int(c + (255 - c) * 0.45) for c in color)
+    return color

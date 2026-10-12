@@ -131,19 +131,62 @@ began with someone realising they no longer had to "win" at museums by reading
 every word, so the default sounds like that: "You do not have to read everything.
 Look at what you like. Get what you get." Rewrite it to fit each show.
 
-## Tones
+## Moods
 
-Ask once, default to **Museum**.
+The person can ask for any mood, in their own words: "existential", "like a nature
+documentary", "my grandmother wrote it", "a heist", "sad but funny". Ask once, in the
+questions of step 3, and offer a few of the moods below as examples. Default to
+**Museum**.
 
-| Tone | Sounds like |
-| --- | --- |
-| Museum | A real wall text. Sincere, measured, gently grand. The default |
-| Retrospective | A blockbuster show for a giant of the art world. Maximum reverence |
-| Deadpan | Dry, short, factual, devastatingly literal |
-| Tender | Warm and quiet. For pictures of someone who is gone, a pet, a hard year. Funny only if the person wants it |
+A mood changes the curator's sensibility: what they notice, which touchstones they
+reach for, the rhythm of the sentences, the titles, the room panels, the visitor
+note, and sometimes the walls. It never changes the frame. It is always a museum,
+the labels are always 150 to 250 words, and the ground rules above always hold.
 
-If the photos show grief, illness or a memorial, switch to Tender without being asked
-and keep the jokes out unless the person brings them.
+| Mood | The curator | Reach for | Walls |
+| --- | --- | --- | --- |
+| Museum | Sincere, measured, gently grand. The default | Any touchstone that fits | white |
+| Existential | Every object raises the question of why anything exists, and the answer is gently withheld. Time passing, the self, choice, absurdity, small acts of meaning. Calm, never despairing. Funny in the way Beckett is funny | Rothko's dark late paintings; Giacometti's thin walking figures; Hopper; On Kawara's date paintings; Camus's Sisyphus, who we must imagine happy | black |
+| Retrospective | A blockbuster for a giant of the art world. Maximum reverence, "the artist's mature period" | Picasso's periods; the career survey | white |
+| Deadpan | Dry, short sentences, devastatingly literal. Still 150 words, all of them flat | The New Topographics; Ruscha's books | white |
+| Tender | Warm and quiet. For someone who is gone, a pet, a hard year. Funny only if invited | Vivian Maier; family albums; the vanitas, gently | grey |
+| Romantic | Sublime nature, longing, weather as feeling | Caspar David Friedrich; Turner's storms | white |
+| Noir | Shadows, suspicion, every photo a clue, the city at 2 a.m. | Weegee's night photographs; Hopper's *Nighthawks* | black |
+| Manifesto | A Futurist or Dada manifesto: loud, sweeping, absurd, in capitals now and then | Marinetti's *Futurist Manifesto*; Tristan Tzara | white |
+| Natural history | The artist as a specimen, studied in their habitat by a patient naturalist | Audubon; museum dioramas | grey |
+| Far future | A museum in the year 3026 trying to interpret relics of the early phone age, often wrongly | Archaeology labels; the Rosetta Stone | black |
+| For kids | An audio guide for a seven year old: wonder, questions, "can you spot the...?" | Picture books; Matisse's cut outs | white |
+
+**A custom mood.** Take the request seriously and interpret it inside the museum
+frame. Pick the sensibility, two or three touchstones that fit it truthfully, the walls
+(white, grey, black or any hex color) and a visitor note in that key. Record the
+request in `exhibition.json` as `mood`, in the person's own words. If a mood would
+mean mocking the person, someone in the photos, or a group of people, keep the mood's
+style and drop the cruelty. If photos show grief, illness or a memorial, lean Tender
+whatever mood was asked, unless the person clearly wants otherwise.
+
+### An existential label, for reference
+
+> **Ground (Grey)**, 2025
+> Digital photograph (iPhone 15 Pro Max, ultra wide lens), ISO 800
+>
+> A carpet, seen from directly above, extends to every edge of the frame and, we
+> must assume, beyond it. There is no horizon. There is no furniture, no door, no
+> indication of where the room ends or why it began. Thousands of identical grey
+> loops each cast their own small shadow, as if each had been asked to account for
+> itself and could not. At the lower edge, a single pink shape, a sock perhaps,
+> confirms that someone is standing here, and that they have looked down.
+>
+> Mark Rothko spent his last years painting fields of dark color that offer the eye
+> nowhere to rest and nothing to hold. Standing before them, visitors report a
+> feeling that is hard to name and harder to leave. The artist's carpet produces a
+> related effect at a fraction of the scale. It is an all over surface, a field
+> without a figure, and the figure, when it arrives, is only a foot.
+>
+> Albert Camus asked us to imagine Sisyphus happy, pushing his rock up the hill
+> forever. The carpet asks something smaller. Much of any year is spent looking at
+> the floor, waiting for the next thing. The artist looked, and then, apparently,
+> took a picture of it. That is not nothing. It may be most of it.
 
 ## Touchstones
 

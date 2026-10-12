@@ -1,6 +1,6 @@
 ---
 name: exhibit
-description: Turns any set of photos into a museum exhibition of the person's own life. Writes earnest, slightly ridiculous wall texts for each picture, builds an "Artist's Life" timeline from the photos' dates and places, and makes a gallery page, social media cards and a short vertical video to post. Use when someone uploads or points to photos and wants an exhibit, a gallery, wall labels, a museum description, an art critique of their pictures, or says "My Guggenheim".
+description: Turns any set of photos into a museum exhibition of the person's own life. Writes earnest, slightly ridiculous wall texts for each picture in any mood the person asks for (museum, existential, noir, tender or their own words), builds an "Artist's Life" timeline from the photos' dates and places, and makes a gallery page, social media cards and a short vertical video to post. Use when someone uploads or points to photos and wants an exhibit, a gallery, wall labels, a museum description, an art critique of their pictures, or says "My Guggenheim".
 ---
 
 # Exhibit
@@ -75,7 +75,8 @@ single short message, with defaults, so the person can just say "go":
 - How should the artist be credited? (a name, initials, or "The Artist")
 - If more than a third have no date: "Roughly when were these taken? A year, or
   'college', is plenty." Same for places if the timeline would be thin.
-- Tone: Museum (default), Retrospective, Deadpan or Tender. See the voice guide.
+- Mood: anything they like, in their own words. Offer a few examples (Museum,
+  Existential, Noir, Tender, Far future) and say custom is welcome. See the voice guide.
 - Optional: a birth year for the tombstone, anything a picture means to them.
 
 If they already said to just do it, skip the questions, credit "The Artist", and use
@@ -128,7 +129,7 @@ Tell the person, briefly:
    to publish `gallery/index.html`. It is a private page until they share it.
 4. That the film has no music on purpose: add a sound in the app they post from.
 
-Then offer one round of changes: a different tone, a renamed work, a photo dropped or
+Then offer one round of changes: a different mood, a renamed work, a photo dropped or
 added, a longer timeline. Edit `exhibition.json` (or run `inspect_photos.py` again for
 new photos) and rebuild.
 

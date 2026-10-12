@@ -22,6 +22,7 @@ import sys
 from pathlib import Path
 
 from common import (
+    accent_color, wall_colors,
     INK, SOFT_INK, WALL, Image, ImageDraw, clamp_lines, draw_lines, first_sentences, fit_inside,
     fit_sentences, font, hex_to_rgb, load_json, open_photo, tombstone_artist, wrap,
 )
@@ -250,7 +251,9 @@ def main():
     ex = load_json(folder / "exhibition.json")
     meta = {w["id"]: w for w in manifest["works"]}
     W, H = FORMATS[args.format]
-    accent = hex_to_rgb(ex.get("accent"))
+    global WALL, INK, SOFT_INK
+    WALL, INK, SOFT_INK = wall_colors(ex)
+    accent = accent_color(ex)
     works = ex["works"][: args.max_works]
 
     scenes = [scene_title(ex, accent, W, H, args.format)]

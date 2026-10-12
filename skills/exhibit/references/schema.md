@@ -5,6 +5,8 @@ script checks it and says exactly what to fix.
 
 ```json
 {
+  "mood": "Museum",
+  "walls": "white",
   "kicker": "Collection in Focus",
   "title": "Late Suburban Currents",
   "accent": "#1868c4",
@@ -48,6 +50,8 @@ script checks it and says exactly what to fix.
 | `statement` | yes | A list of paragraphs (or one string with blank lines) |
 | `works` | yes | In the order they hang. Each `id` must match one in `manifest.json` |
 | `works[].title`, `works[].label` | yes | `*asterisks*` make italics |
+| `mood` | no | The mood the person asked for, in their own words. A record; the words do the work |
+| `walls` | no | `white` (follows the viewer's light or dark setting), `grey`, `black`, or a hex color. Sets the gallery, cards and film |
 | `kicker` | no | Defaults to "Collection in Focus" |
 | `accent` | no | Hex color for titles. Defaults to a wall title blue. Pick from a photo's palette for a show with a strong color |
 | `artist.name`, `artist.born` | no | `born` adds "(b. 1994)" to the tombstone. Only if the person offers it |
