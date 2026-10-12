@@ -132,6 +132,8 @@ if "--quick" not in sys.argv:
             errors.append("demo caption is missing the project link")
         if "Late Suburban Currents" not in html or html.count('class="room') != 6:
             errors.append("demo gallery is missing its title or rooms")
+        if "Late Suburban Currents" not in (demo / "share" / "wall-texts.md").read_text():
+            errors.append("demo wall-texts.md is missing")
         if not list((demo / "share").glob("film-square.*")):
             errors.append("demo film was not written")
         if len(list((demo / "share").glob("*.png"))) < 8:

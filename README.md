@@ -17,7 +17,7 @@ cover and a short vertical film.
 The more random the photos, the better. A parking lot at sunset. A receipt. A blurry
 pigeon. A screenshot from 11:58 p.m.
 
-![Version](https://img.shields.io/badge/version-0.6.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757)
+![Version](https://img.shields.io/badge/version-0.7.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757)
 
 ![A carousel from the demo show: the wall text, two works and the timeline](docs/images/carousel.png)
 
@@ -88,7 +88,8 @@ npx skills add namedtoaster/my-guggenheim
 | `share/01-wall-text.png` ... | A carousel at 1080x1350: the intro wall, one card per work, the timeline |
 | `share/story-cover.png` | A 1080x1920 cover for Stories |
 | `share/film-vertical.mp4` | A 30 to 60 second film for Reels, TikTok and Shorts. Silent, so you pick the sound |
-| `share/caption.txt` | A caption with `#MyGuggenheim` |
+| `share/caption.txt` | A caption with `#MyGuggenheim` and the link to make your own |
+| `share/wall-texts.md` | Every word of the show, to read anywhere without the photos |
 
 <table>
 <tr>

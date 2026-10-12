@@ -21,6 +21,8 @@ In an exhibit folder:
   its label, the timeline, a closing note. Opens anywhere, no internet needed.
 - `share/`: a carousel (`01-wall-text.png`, one card per work, `timeline.png`), a story
   cover (1080x1920) and `caption.txt`.
+- `share/wall-texts.md`: every word of the show in hanging order, to read anywhere
+  without the photos.
 - `share/film-vertical.mp4`: a 30 to 60 second walk through the show for Reels,
   TikTok or Shorts.
 

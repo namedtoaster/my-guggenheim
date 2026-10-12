@@ -496,6 +496,35 @@ def card_story(ex, accent, cover, size=(1080, 1920)):
     return c
 
 
+def wall_texts(ex, meta):
+    """Every word of the show, in hanging order, as Markdown for reading anywhere."""
+    out = [f"*{ex.get('kicker') or 'Collection in Focus'}*", "", f"# {ex['title']}", ""]
+    statement = ex["statement"] if isinstance(ex["statement"], list) else [ex["statement"]]
+    out += [p.strip() + "\n" for p in statement]
+    rooms = {}
+    for entry in (ex.get("timeline") or {}).get("entries", []):
+        first = next((w["id"] for w in ex["works"] if w["id"] in entry.get("works", [])), None)
+        if first and entry.get("room_text"):
+            rooms[first] = entry
+    for n, work in enumerate(ex["works"], 1):
+        if work["id"] in rooms:
+            entry = rooms[work["id"]]
+            out += ["---", "", f"## {entry.get('heading', '')}", f"*{entry.get('when', '')}*", "", entry["room_text"], ""]
+        m = meta[work["id"]]
+        title = work["title"].replace("*", "")
+        out += [f"### {n}. {title}" + (f", {work['date']}" if work.get("date") else ""), ""]
+        out += [f"*{work['medium']}*  " if work.get("medium") else "",
+                f"*{m['width']:,} \u00d7 {m['height']:,} pixels. {work.get('credit') or 'Collection of the artist'}.*", ""]
+        out += [p.strip() + "\n" for p in work["label"].split("\n\n") if p.strip()]
+    tl = ex.get("timeline") or {}
+    if tl.get("entries"):
+        out += ["---", "", f"## {tl.get('title') or 'The Artist' + chr(39) + 's Life'}", ""]
+        out += [f"- **{e.get('when', '')}: {e.get('heading', '')}.** {e.get('text', '')}" for e in tl["entries"]]
+        out += [""]
+    out += ["---", "", f"*{ex.get('visitor_note') or 'You do not have to read everything.'}*", ""]
+    return "\n".join(out)
+
+
 def caption(ex):
     share = ex.get("share") or {}
     text = share.get("caption") or f'Now on view: "{ex["title"]}". {len(ex["works"])} works from the collection of the artist.'
@@ -570,10 +599,11 @@ def main():
         im.save(share / name, optimize=True)
     card_story(exhibition, accent, photos.get(cover_id, photos[exhibition["works"][0]["id"]])).save(share / "story-cover.png", optimize=True)
     (share / "caption.txt").write_text(caption(exhibition), encoding="utf-8")
+    (share / "wall-texts.md").write_text(wall_texts(exhibition, meta), encoding="utf-8")
 
     size_mb = (gallery / "index.html").stat().st_size / 1e6
     print(f"Gallery: {gallery / 'index.html'} ({size_mb:.1f} MB)")
-    print(f"Share:   {share}/ ({len(cards)} carousel cards, story-cover.png, caption.txt)")
+    print(f"Share:   {share}/ ({len(cards)} carousel cards, story-cover.png, caption.txt, wall-texts.md)")
 
 
 if __name__ == "__main__":

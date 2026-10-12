@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0 (2026-10-12)
+
+- `share/wall-texts.md`: every word of a show in hanging order (intro wall, room
+  panels, labels, timeline, closing note) to read anywhere without the photos.
+
 ## 0.6.1 (2026-10-12)
 
 - Names that lead back to a person (their businesses, projects, apps, accounts,
