@@ -43,10 +43,20 @@ Use the photos the person uploaded or pointed to. Uploads in claude.ai are in
 in the conversation. 3 is the minimum, 6 to 15 is the sweet spot, more than 24 makes a
 long film (the film uses the first 12 unless told otherwise).
 
+- **A zip is the best way to send photos.** Photos attached one by one in a chat app
+  usually lose their date and place; a zip keeps the originals. Pass the zip itself
+  to the script below. If someone attaches loose photos and they come back undated,
+  suggest a zip next time.
+- **Videos work too.** The script saves one frame as a still and dates it from the
+  video's own recording date. Call the medium "Video still, from an N second moving
+  image". If the moment you want is not the frame it picked, take another with ffmpeg.
+- **iPhone photos are HEIC.** If the script reports HEIC problems, run
+  `python3 -m pip install pillow-heif` and run it again.
+
 ## Step 2: Read them
 
 ```
-python3 SKILL_DIR/scripts/inspect_photos.py PHOTOS_OR_FOLDER... --out EXHIBIT
+python3 SKILL_DIR/scripts/inspect_photos.py PHOTOS_FOLDERS_ZIPS_OR_VIDEOS... --out EXHIBIT
 ```
 
 This writes `EXHIBIT/manifest.json` (date, where the date came from, camera, rough

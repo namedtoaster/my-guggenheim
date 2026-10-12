@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """Reads a set of photos and writes what a curator needs to know about them.
 
-    python3 inspect_photos.py PHOTO_OR_FOLDER [...] --out EXHIBIT_FOLDER
+    python3 inspect_photos.py PHOTO_FOLDER_ZIP_OR_VIDEO [...] --out EXHIBIT_FOLDER
+
+Takes photos, folders, zip files and videos. A zip is unpacked into
+EXHIBIT_FOLDER/originals/ (zips keep the camera data that chat apps strip). A
+video becomes a still frame in EXHIBIT_FOLDER/stills/, dated from the video's own
+recording date; this needs ffmpeg.
 
 For each photo it records the size, when it was taken (from the camera data, the
 file name, or not at all), the camera, a rough place, and the colors. It writes:
@@ -18,9 +23,13 @@ Read only on the originals. No network.
 
 import argparse
 import colorsys
+import json
 import os
 import re
+import shutil
+import subprocess
 import sys
+import zipfile
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -46,12 +55,16 @@ def slug(text):
     return text or "work"
 
 
+VIDEO_SUFFIXES = {".mov", ".mp4", ".m4v"}
+WANTED = IMAGE_SUFFIXES | VIDEO_SUFFIXES | {".zip"}
+
+
 def collect(paths):
     files = []
     for raw in paths:
         p = Path(raw).expanduser()
         if p.is_dir():
-            files += sorted(f for f in p.rglob("*") if f.suffix.lower() in IMAGE_SUFFIXES and not f.name.startswith("."))
+            files += sorted(f for f in p.rglob("*") if f.suffix.lower() in WANTED and not f.name.startswith("."))
         elif p.is_file():
             files.append(p)
         else:
@@ -63,6 +76,78 @@ def collect(paths):
             seen.add(key)
             out.append(f)
     return out
+
+
+def unique_path(folder, name):
+    path = folder / name
+    n = 2
+    while path.exists():
+        path = folder / f"{Path(name).stem}-{n}{Path(name).suffix}"
+        n += 1
+    return path
+
+
+def unzip(zpath, folder):
+    """Copy the photos and videos out of a zip, flattened, skipping Mac metadata."""
+    folder.mkdir(parents=True, exist_ok=True)
+    found = []
+    with zipfile.ZipFile(zpath) as zf:
+        for info in zf.infolist():
+            name = Path(info.filename).name  # never trust folder names inside a zip
+            if info.is_dir() or "__MACOSX" in info.filename or name.startswith("."):
+                continue
+            if Path(name).suffix.lower() not in IMAGE_SUFFIXES | VIDEO_SUFFIXES:
+                continue
+            target = unique_path(folder, name)
+            with zf.open(info) as src, open(target, "wb") as dst:
+                shutil.copyfileobj(src, dst)
+            found.append(target)
+    return found
+
+
+def video_meta(path):
+    """Duration, recording date and rough place of a video, from ffprobe."""
+    try:
+        raw = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration:format_tags",
+                              "-of", "json", str(path)], capture_output=True, text=True, check=True).stdout
+        fmt = json.loads(raw).get("format", {})
+    except Exception:
+        return None
+    tags = {k.lower(): v for k, v in (fmt.get("tags") or {}).items()}
+    when, source = None, "unknown"
+    apple = tags.get("com.apple.quicktime.creationdate")
+    if apple:
+        try:  # the phone's own wall clock time, which is what a label wants
+            when, source = datetime.fromisoformat(apple[:19]), "video recording date"
+        except ValueError:
+            pass
+    if when is None and tags.get("creation_time"):
+        try:
+            t = datetime.fromisoformat(tags["creation_time"][:19])
+            # Often the time the file was uploaded or copied, not recorded.
+            if datetime.now() - t > timedelta(days=2):
+                when, source = t, "video file (weak)"
+        except ValueError:
+            pass
+    place = None
+    loc = tags.get("com.apple.quicktime.location.iso6709") or tags.get("location")
+    m = re.match(r"([+-]\d+(?:\.\d+)?)([+-]\d+(?:\.\d+)?)", loc or "")
+    if m:
+        place = {"lat": round(float(m.group(1)), 1), "lon": round(float(m.group(2)), 1)}
+    return {"seconds": round(float(fmt.get("duration") or 0), 1), "when": when, "source": source, "place": place}
+
+
+def video_still(path, folder):
+    """Save one frame from a video as a JPEG. Returns (still path, metadata) or raises."""
+    if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
+        raise RuntimeError("videos need ffmpeg; install it, or send a screenshot of the moment instead")
+    meta = video_meta(path) or {"seconds": 0, "when": None, "source": "unknown", "place": None}
+    folder.mkdir(parents=True, exist_ok=True)
+    still = unique_path(folder, f"{path.stem}.jpg")
+    at = max(0.0, meta["seconds"] * 0.4)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{at:.2f}", "-i", str(path), "-frames:v", "1",
+                    "-q:v", "2", str(still)], check=True)
+    return still, meta
 
 
 def exif_data(path):
@@ -264,13 +349,40 @@ def main():
 
     out = Path(args.out)
     (out / "previews").mkdir(parents=True, exist_ok=True)
-    files = collect(args.photos)
+    files, videos, problems = [], {}, []
+    for f in collect(args.photos):
+        suffix = f.suffix.lower()
+        if suffix == ".zip":
+            try:
+                inner = unzip(f, out / "originals")
+            except zipfile.BadZipFile:
+                problems.append({"file": str(f), "problem": "not a readable zip file"})
+                continue
+            for g in inner:
+                if g.suffix.lower() in VIDEO_SUFFIXES:
+                    try:
+                        still, meta = video_still(g, out / "stills")
+                        files.append(still)
+                        videos[still.resolve()] = (g, meta)
+                    except Exception as err:
+                        problems.append({"file": str(g), "problem": str(err)})
+                else:
+                    files.append(g)
+        elif suffix in VIDEO_SUFFIXES:
+            try:
+                still, meta = video_still(f, out / "stills")
+                files.append(still)
+                videos[still.resolve()] = (f, meta)
+            except Exception as err:
+                problems.append({"file": str(f), "problem": str(err)})
+        else:
+            files.append(f)
     if not files:
         sys.exit("No photos found.")
     if any(f.suffix.lower() in {".heic", ".heif"} for f in files):
         enable_heif()
 
-    works, problems, used_ids = [], [], set()
+    works, used_ids = [], set()
     today = datetime.now()
     for path in files:
         try:
@@ -280,7 +392,10 @@ def main():
             continue
         base, gps = exif_data(path)
 
+        video = videos.get(path.resolve())
         when, source = parse_exif_date(base), "camera"
+        if video and video[1]["when"]:
+            when, source = video[1]["when"], video[1]["source"]
         if when is None:
             when, source = parse_filename_date(path.name), "file name"
         if when is None:
@@ -312,14 +427,16 @@ def main():
             "width": im.width,
             "height": im.height,
             "orientation": "portrait" if im.height > im.width * 1.05 else "landscape" if im.width > im.height * 1.05 else "square",
-            "kind": guess_kind(path, base, im.size),
+            "kind": "video still" if video else guess_kind(path, base, im.size),
             "taken": when.isoformat(timespec="minutes") if when else None,
             "date_source": source,
             "camera": cam,
             "camera_details": cam_details,
-            "rough_place": rough_place(gps),
+            "rough_place": video[1]["place"] if video else rough_place(gps),
             "colors": colors(im),
         })
+        if video:
+            works[-1]["video"] = {"file": video[0].name, "seconds": video[1]["seconds"]}
 
     works.sort(key=lambda w: (w["taken"] is None, w["taken"] or "", w["id"]))
     manifest = {

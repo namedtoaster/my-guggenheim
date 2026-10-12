@@ -357,7 +357,7 @@ def card_timeline(ex, accent, size=(1080, 1350)):
         ny = draw_lines(d, (m + 44, y + 32), hl, font("semibold", 36), INK, 44)
         if text_lines and entry.get("text"):
             tf = font("regular", 27)
-            ny = draw_lines(d, (m + 44, ny + 6), fit_sentences(entry["text"].replace("*", ""), tf, W - 2 * m - 44, text_lines), tf, SOFT_INK, 38)
+            ny = draw_lines(d, (m + 44, ny + 6), fit_sentences(entry["text"].replace("*", ""), tf, W - 2 * m - 44, text_lines, clip=False), tf, SOFT_INK, 38)
         y = max(ny + 34, y + min(each, 400))
     return c
 

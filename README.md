@@ -17,7 +17,7 @@ cover and a short vertical film.
 The more random the photos, the better. A parking lot at sunset. A receipt. A blurry
 pigeon. A screenshot from 11:58 p.m.
 
-![Version](https://img.shields.io/badge/version-0.2.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757)
+![Version](https://img.shields.io/badge/version-0.3.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757)
 
 ![A carousel from the demo show: the wall text, two works and the timeline](docs/images/carousel.png)
 
@@ -50,10 +50,16 @@ Then:
 /exhibit ~/Pictures/some-folder
 ```
 
+> [!TIP]
+> **Send a zip.** Photos attached one by one in a chat app usually arrive without
+> their date and place. Zip them first and attach the zip: the originals, with all
+> their data, come through, and the timeline builds itself. iPhone HEIC photos and
+> short videos work too.
+
 ### On your phone, or Claude Code on the web
 
 Fork this repo, open it in [Claude Code on the web](https://claude.ai/code) or the
-Claude app, attach your photos and say **"make my exhibit"**. The skill is already in
+Claude app, attach a zip of your photos and say **"make my exhibit"**. The skill is already in
 the repo (`.claude/skills/exhibit`), so there is nothing to install. Your photos stay
 in the session and are never committed (`exhibits/` is ignored).
 
@@ -64,7 +70,7 @@ in the session and are never committed (`exhibits/` is ignored).
    with `python3 scripts/package_skill.py`.
 2. In claude.ai, turn on code execution and upload the zip as a skill (Settings,
    then Capabilities or Skills, depending on your plan).
-3. In any chat, attach photos and say **"make my exhibit"**.
+3. In any chat, attach a zip of photos and say **"make my exhibit"**.
 
 ### Other agents
 

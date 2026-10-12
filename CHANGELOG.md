@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 (2026-10-12)
+
+Send a zip.
+
+- `inspect_photos.py` reads zip files (originals keep their date and place, unlike
+  photos attached one by one) and videos (one frame becomes a still, dated from the
+  recording). HEIC is supported with `pillow-heif`.
+- The README and the skill now recommend sending a zip.
+- Timeline cards and the film no longer cut a period's text off mid sentence.
+
 ## 0.2.0 (2026-10-12)
 
 Labels that read like a modern museum.

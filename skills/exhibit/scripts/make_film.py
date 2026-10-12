@@ -175,7 +175,7 @@ def scene_timeline(ex, accent, W, H, fmt):
         ny = draw_lines(r.draw, (m + 50, y + int(40 * s)), hl, font("semibold", int(42 * s)), INK, int(50 * s))
         if text_lines and entry.get("text"):
             tf = font("regular", int(32 * s))
-            draw_lines(r.draw, (m + 50, ny + 6), fit_sentences(entry["text"].replace("*", ""), tf, W - 2 * m - 50, text_lines), tf, SOFT_INK, int(44 * s))
+            draw_lines(r.draw, (m + 50, ny + 6), fit_sentences(entry["text"].replace("*", ""), tf, W - 2 * m - 50, text_lines, clip=False), tf, SOFT_INK, int(44 * s))
         rows.append(r)
         y += step
     frames = int((1.6 + 0.6 * len(rows) + 1.8) * FPS)

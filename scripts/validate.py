@@ -98,6 +98,23 @@ if "--quick" not in sys.argv:
             errors.append("demo film was not written")
         if len(list((demo / "share").glob("*.png"))) < 8:
             errors.append("demo share cards are missing")
+        # The same photos sent as a zip must come through with their dates.
+        import tempfile
+        import zipfile
+        with tempfile.TemporaryDirectory() as tmp:
+            zpath = Path(tmp) / "photos.zip"
+            with zipfile.ZipFile(zpath, "w") as zf:
+                for f in (demo / "photos").iterdir():
+                    zf.write(f, f"My Photos/{f.name}")
+                zf.writestr("__MACOSX/My Photos/._junk.jpg", b"not a photo")
+            result = subprocess.run([sys.executable, str(scripts / "inspect_photos.py"), str(zpath), "--out", str(Path(tmp) / "out")],
+                                    capture_output=True, text=True)
+            if result.returncode != 0:
+                errors.append(f"reading a zip failed:\n{result.stdout}{result.stderr}")
+            else:
+                m = json.loads((Path(tmp) / "out" / "manifest.json").read_text())
+                if m["count"] != 6 or m["dated"] != 6 or m["problems"]:
+                    errors.append(f"reading a zip gave {m['count']} photos, {m['dated']} dated, problems {m['problems']}")
 
 if errors:
     print(f"{len(errors)} problem(s):")
