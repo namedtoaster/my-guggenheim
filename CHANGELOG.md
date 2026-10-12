@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.1 (2026-10-12)
+
+- COMMUNITY.md, "On view elsewhere": other people's exhibitions are listed as links
+  to their own posts. No one else's photos are ever stored in the repo, and a link
+  comes down on request. A "Share your exhibition" form adds one.
+- Validation allows real photos only in the author's own showcase folder.
+
 ## 0.8.0 (2026-10-12)
 
 A real exhibition.

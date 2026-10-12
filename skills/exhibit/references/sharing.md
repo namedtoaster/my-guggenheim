@@ -20,6 +20,13 @@ project's name and link, small and quiet:
 If someone asks for a show without it, set `"share": {"credit": false}` in
 `exhibition.json`. The page keeps its small footer link either way.
 
+## Getting on the wall
+
+Once a show is posted, the person can add a link to it on "On view elsewhere"
+(`COMMUNITY.md` in the repo) with the "Share your exhibition" form:
+https://github.com/namedtoaster/my-guggenheim/issues/new?template=share-exhibition.yml
+Only the link is kept. Never offer to put their photos in the repository.
+
 ## Posting it
 
 | Where | What to post | Notes |

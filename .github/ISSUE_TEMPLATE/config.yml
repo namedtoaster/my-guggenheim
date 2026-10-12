@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Show us your exhibition
+  - name: Talk about it
     url: https://github.com/namedtoaster/my-guggenheim/discussions
-    about: Post your show (or just your favourite wall text) in Discussions.
+    about: Favourite wall texts, ideas and questions go in Discussions.

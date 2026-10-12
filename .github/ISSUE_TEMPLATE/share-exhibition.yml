@@ -1,0 +1,38 @@
+name: Share your exhibition
+description: Add a link to an exhibition you posted, to the "On view elsewhere" page
+title: "Exhibition: "
+labels: [exhibition]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Only a link is added. Your photos stay on your own account, and nothing is copied
+        into the repository. Ask any time and the link comes down.
+        Please do not attach photos here.
+  - type: input
+    id: title
+    attributes:
+      label: Title of the exhibition
+    validations:
+      required: true
+  - type: input
+    id: mood
+    attributes:
+      label: Mood
+      description: Museum, Existential, Noir, or your own words.
+  - type: input
+    id: link
+    attributes:
+      label: Link to your post
+      description: An Instagram, TikTok, YouTube, Bluesky or other public post, or a hosted gallery page.
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Permission
+      options:
+        - label: This is my own exhibition, and it's fine to link to it from this repo.
+          required: true
+        - label: Anyone recognisable in it is happy to be shown, or their face is blacked out.
+          required: true

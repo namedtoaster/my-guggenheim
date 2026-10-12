@@ -17,7 +17,7 @@ cover and a short vertical film.
 The more random the photos, the better. A parking lot at sunset. A receipt. A blurry
 pigeon. A screenshot from 11:58 p.m.
 
-![Version](https://img.shields.io/badge/version-0.8.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757) ![Privacy](https://img.shields.io/badge/your%20data-never%20collected-2e7d32)
+![Version](https://img.shields.io/badge/version-0.8.1-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757) ![Privacy](https://img.shields.io/badge/your%20data-never%20collected-2e7d32)
 
 ![Cards from a real exhibition, Nothing Holds Still: the intro wall, four works and the timeline, on black walls](showcase/nothing-holds-still/preview/carousel.jpg)
 
@@ -177,10 +177,11 @@ Code. See [skills/exhibit/references/film.md](skills/exhibit/references/film.md)
 
 ## Show us
 
-Post your show with **#MyGuggenheim**, or share your favourite wall text in
-[Discussions](https://github.com/namedtoaster/my-guggenheim/discussions). If the
-curator ever says something unkind, wrong or too revealing,
-[tell us](https://github.com/namedtoaster/my-guggenheim/issues/new?template=the-curator-said.md)
+Post your show with **#MyGuggenheim**, then
+[add the link](https://github.com/namedtoaster/my-guggenheim/issues/new?template=share-exhibition.yml)
+to [On view elsewhere](COMMUNITY.md). Only links go there: your photos stay on your own
+account, never in this repo. If the curator ever says something unkind, wrong or too
+revealing, [tell us](https://github.com/namedtoaster/my-guggenheim/issues/new?template=the-curator-said.md)
 and the voice guide gets better for everyone.
 
 ## Why I made this

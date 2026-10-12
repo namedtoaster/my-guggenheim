@@ -83,16 +83,17 @@ for path in repo_files():
 MEDIA = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp", ".gif", ".tif", ".tiff", ".bmp",
          ".mov", ".mp4", ".m4v", ".avi", ".zip"}
 # Only these folders may hold images. docs/ and assets/ are drawn, not photographed.
-# showcase/ holds exhibitions their owner chose to publish, checked one by one with
-# personal details blacked out; its images must carry no camera data at all.
-MEDIA_ALLOWED = ("docs/images/", "skills/exhibit/assets/", "showcase/")
+# The author's own exhibition is the single published exception, checked image by
+# image with personal details blacked out. Nobody else's photos are ever stored:
+# other people's exhibitions are linked from COMMUNITY.md instead.
+MEDIA_ALLOWED = ("docs/images/", "skills/exhibit/assets/", "showcase/nothing-holds-still/")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 EMAIL_OK = ("noreply@anthropic.com", "@users.noreply.github.com", "@example.com")
 for path in repo_files():
     rel = path.relative_to(ROOT).as_posix()
     if path.suffix.lower() in MEDIA:
         if not rel.startswith(MEDIA_ALLOWED):
-            errors.append(f"{rel}: photos, videos and zips can't be committed outside {', '.join(MEDIA_ALLOWED)} (personal photos stay in exhibits/, which git ignores)")
+            errors.append(f"{rel}: photos, videos and zips can't be committed here. Personal photos stay in exhibits/ (ignored by git), and other people's exhibitions are linked from COMMUNITY.md, never stored")
             continue
         try:
             from PIL import Image

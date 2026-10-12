@@ -35,7 +35,9 @@ without making anyone's photos less private.
 
 ## Privacy
 
-Nothing about a real person goes in this repo: no personal photos, videos or zips,
+Nothing about a real person goes in this repo, and nobody's photos are stored here.
+To share an exhibition, add a link to [COMMUNITY.md](COMMUNITY.md) with the
+"Share your exhibition" form. Nothing else about a real person goes in either: no personal photos, videos or zips,
 no places or coordinates, no faces, no email addresses. Turn on the check that runs
 before every commit, once per clone:
 

@@ -33,14 +33,16 @@ of faces left out and every name, number plate and personal detail blacked out.
 Exhibitions are made in a folder that git ignores, and every commit and every
 pull request is checked automatically. It is refused if it contains:
 
-- a photo, video or zip outside the folders of drawn demo images and `showcase/`,
-  where an owner chose to publish their own exhibition with every face, name and
-  personal detail blacked out
+- a photo, video or zip outside the folders of drawn demo images and the author's
+  own showcase
 - any camera data in a showcase image
 - location data inside any image
 - a place or coordinates in any data file
 - an email address
 - a network call in the scripts, or a gallery page that loads anything from the internet
+
+Exhibitions other people share are listed in [COMMUNITY.md](COMMUNITY.md) as links
+only. Their photos stay on their own accounts, and a link comes down on request.
 
 ## What we can't promise for you
 

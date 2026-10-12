@@ -12,7 +12,7 @@
   (`scripts/hooks/pre-commit`, turned on by the session start hook in
   `.claude/settings.json`) and in CI. Never bypass it with `--no-verify`.
 - README images and examples are drawn by `examples/make_demo_photos.py`. The one
-  exception is `showcase/`: exhibitions their owner chose to publish, with every
-  face, name, plate and personal detail blacked out and no camera data in any image.
-  Add to it only when the owner asks, and check every image by eye first.
+  exception is the author's own exhibition in `showcase/nothing-holds-still/`, with
+  every face, name, plate and personal detail blacked out. **Nobody else's photos are
+  ever stored here.** Other people's exhibitions are linked from `COMMUNITY.md`.
 - No long dashes (em or en) anywhere. Plain words.
