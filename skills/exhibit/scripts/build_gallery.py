@@ -18,6 +18,7 @@ instead of carrying them inside, which suits hosting on GitHub Pages. No network
 import argparse
 import base64
 import datetime
+import json
 import html
 import io
 import re
@@ -25,12 +26,12 @@ import sys
 from pathlib import Path
 
 from common import (
+    CREDIT_LINE, REPO_URL, credits_on,
     accent_color, wall_colors,
     ACCENT, INK, SOFT_INK, WALL, Image, ImageDraw, clamp_lines, draw_lines, first_sentences, fit_sentences,
     fit_inside, font, hex_to_rgb, load_json, open_photo, tombstone_artist, wrap,
 )
 
-REPO_URL = "https://github.com/namedtoaster/my-guggenheim"
 
 
 # ---------------------------------------------------------------- checking
@@ -179,7 +180,8 @@ def build_page(ex, manifest, srcs, thumbs):
 
     note = ex.get("visitor_note") or "You do not have to read everything. Look at what you like. Get what you get."
     description = html.escape(first_sentences(" ".join(ex["statement"]) if isinstance(ex["statement"], list) else ex["statement"], 180))
-    share_text = html.escape(f'{ex["title"]}, an exhibition by {artist.get("name") or "me"}')
+    share_text = json.dumps(f'"{ex["title"]}", my camera roll as a museum exhibition. '
+                            f'Make your own with My Guggenheim, free and open source:').replace("</", "<\\/")
 
     if custom_walls:
         dark = wall_colors(ex)[1][0] > 128
@@ -198,7 +200,8 @@ def build_page(ex, manifest, srcs, thumbs):
 <meta name="description" content="{description}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
-<meta name="generator" content="My Guggenheim">
+<meta property="og:site_name" content="My Guggenheim">
+<meta name="generator" content="My Guggenheim ({REPO_URL})">
 <style>
 {wall_css}
 * {{ box-sizing: border-box; }}
@@ -242,6 +245,14 @@ footer {{ border-top: 1px solid var(--rule); padding: 10vh 0 14vh; max-width: 68
 footer .note {{ font-size: 21px; margin: 0 0 1.4em; }}
 footer small {{ color: var(--soft); display: block; margin-top: 2em; font-size: 13px; }}
 footer a {{ color: inherit; }}
+.make {{ margin: 3em 0 0; padding: 1.4em 1.5em; border: 1px solid var(--rule); border-radius: 14px; }}
+.make h2 {{ font-size: 22px; font-weight: 600; margin: 0 0 .3em; }}
+.make p {{ margin: 0 0 1em; color: var(--soft); }}
+.make a.cta {{ display: inline-block; padding: .55em 1.1em; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }}
+.shares {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1em; }}
+.shares a, .shares button {{ font-size: 14px; padding: .45em .95em; border-radius: 999px; border: 1px solid var(--rule); color: var(--ink); text-decoration: none; background: transparent; }}
+.topline {{ font-size: 13px; color: var(--soft); padding-top: 18px; }}
+.topline a {{ color: inherit; }}
 button {{ font: inherit; font-size: 15px; padding: .55em 1.1em; border-radius: 999px; border: 1px solid var(--ink);
   background: transparent; color: var(--ink); cursor: pointer; }}
 button:hover {{ background: var(--ink); color: var(--wall); }}
@@ -256,6 +267,7 @@ button:hover {{ background: var(--ink); color: var(--wall); }}
 </head>
 <body>
 <main class="wrap">
+<p class="topline">A personal exhibition made with <a href="{REPO_URL}">My Guggenheim</a>. <a href="{REPO_URL}">Make your own</a></p>
 <header class="panel">
   <p class="kicker">{kicker}</p>
   <h1>{title}</h1>
@@ -266,20 +278,51 @@ button:hover {{ background: var(--ink); color: var(--wall); }}
 {timeline_html}
 <footer>
   <p class="note">{inline(note)}</p>
-  <button type="button" id="share">Share this exhibition</button>
-  <small>Made with <a href="{REPO_URL}">My Guggenheim</a>. A personal exhibition,
+  <div class="shares" aria-label="Share">
+    <button type="button" id="share">Share</button>
+    <a data-net="x" href="#">X</a><a data-net="bluesky" href="#">Bluesky</a><a data-net="threads" href="#">Threads</a>
+    <a data-net="facebook" href="#">Facebook</a><a data-net="linkedin" href="#">LinkedIn</a><a data-net="reddit" href="#">Reddit</a>
+    <a data-net="email" href="#">Email</a>
+  </div>
+  <section class="make">
+    <h2>Make your own exhibition</h2>
+    <p>Turn your own camera roll into a museum show, with wall texts, a timeline, cards and a film. Free and open source, and it runs with Claude.</p>
+    <a class="cta" href="{REPO_URL}">My Guggenheim on GitHub</a>
+  </section>
+  <small>Made with <a href="{REPO_URL}">My Guggenheim</a> ({REPO_URL.replace("https://", "")}). A personal exhibition,
   not affiliated with the Solomon R. Guggenheim Foundation or any museum.</small>
 </footer>
 </main>
 <script>
-document.getElementById('share').addEventListener('click', async () => {{
-  const data = {{ title: document.title, text: "{share_text}", url: location.href }};
-  try {{
-    if (navigator.share && !location.protocol.startsWith('file')) {{ await navigator.share(data); return; }}
-    await navigator.clipboard.writeText(location.protocol.startsWith('file') ? data.text : data.url);
-    document.getElementById('share').textContent = 'Copied';
-  }} catch (e) {{}}
-}});
+(() => {{
+  const repo = "{REPO_URL}";
+  const hosted = location.protocol.startsWith('http');
+  // A hosted gallery shares its own link; a file opened from disk shares the project.
+  const url = hosted ? location.href : repo;
+  const text = {share_text} + (hosted ? " " + repo : "") + " #MyGuggenheim";
+  const enc = encodeURIComponent;
+  const nets = {{
+    x: "https://twitter.com/intent/tweet?text=" + enc(text) + "&url=" + enc(url),
+    bluesky: "https://bsky.app/intent/compose?text=" + enc(text + " " + url),
+    threads: "https://www.threads.net/intent/post?text=" + enc(text + " " + url),
+    facebook: "https://www.facebook.com/sharer/sharer.php?u=" + enc(url),
+    linkedin: "https://www.linkedin.com/sharing/share-offsite/?url=" + enc(url),
+    reddit: "https://www.reddit.com/submit?url=" + enc(url) + "&title=" + enc(document.title + ", made with My Guggenheim"),
+    email: "mailto:?subject=" + enc(document.title) + "&body=" + enc(text + "\\n\\n" + url),
+  }};
+  document.querySelectorAll('[data-net]').forEach(a => {{
+    a.href = nets[a.dataset.net];
+    if (a.dataset.net !== 'email') {{ a.target = '_blank'; a.rel = 'noopener'; }}
+  }});
+  const btn = document.getElementById('share');
+  btn.addEventListener('click', async () => {{
+    try {{
+      if (navigator.share) {{ await navigator.share({{ title: document.title, text, url }}); return; }}
+      await navigator.clipboard.writeText(text + " " + url);
+      btn.textContent = 'Copied';
+    }} catch (e) {{}}
+  }});
+}})();
 </script>
 </body>
 </html>
@@ -300,6 +343,12 @@ def paste_with_shadow(canvas, im, xy):
     canvas.paste(im, (x, y))
 
 
+def credit(d, ex, W, H):
+    """The small line at the foot of every shared card, so people can find the project."""
+    if credits_on(ex):
+        d.text((W // 2, H - 34), CREDIT_LINE, font=font("regular", 22), fill=SOFT_INK, anchor="ms")
+
+
 def card_wall_text(ex, accent, size=(1080, 1350)):
     W, H = size
     c = Image.new("RGB", size, WALL)
@@ -313,7 +362,7 @@ def card_wall_text(ex, accent, size=(1080, 1350)):
     y = draw_lines(d, (m, y), lines, tf, accent, 104) + 50
     statement = ex["statement"] if isinstance(ex["statement"], list) else [ex["statement"]]
     bf = font("regular", 36)
-    room = (H - 190 - y) // 52
+    room = (H - 210 - y) // 52
     for para in statement:
         if room <= 1:
             break
@@ -322,8 +371,9 @@ def card_wall_text(ex, accent, size=(1080, 1350)):
             break
         y = draw_lines(d, (m, y), lines, bf, INK, 52) + 26
         room -= len(lines) + 1
-    d.text((m, H - 120), tombstone_artist(ex.get("artist")), font=font("semibold", 30), fill=INK)
-    d.text((m, H - 78), "Collection of the artist", font=font("regular", 28), fill=SOFT_INK)
+    d.text((m, H - 140), tombstone_artist(ex.get("artist")), font=font("semibold", 30), fill=INK)
+    d.text((m, H - 98), "Collection of the artist", font=font("regular", 28), fill=SOFT_INK)
+    credit(d, ex, W, H)
     return c
 
 
@@ -343,10 +393,11 @@ def card_work(ex, work, meta, photo, number, size=(1080, 1350)):
     tl = wrap(title + (f", {work['date']}" if work.get("date") else ""), font("italic", 30), W - 2 * m)
     y = draw_lines(d, (m, y), clamp_lines(tl, 2), font("italic", 30), INK, 40) + 22
     bf = font("regular", 29)
-    room = max(1, (H - 70 - y) // 42)
+    room = max(1, (H - 100 - y) // 42)
     lines = fit_sentences(work["label"].replace("*", "").replace("\n\n", " "), bf, W - 2 * m, room)
     draw_lines(d, (m, y), lines, bf, INK, 42)
     d.text((W - m, 44), f"{number}/{len(ex['works'])}", font=font("regular", 24), fill=SOFT_INK, anchor="ra")
+    credit(d, ex, W, H)
     return c
 
 
@@ -360,11 +411,11 @@ def card_timeline(ex, accent, size=(1080, 1350)):
     hf = font("medium", 78)
     y = draw_lines(d, (m, 180), wrap(tl.get("title") or "The Artist's Life", hf, W - 2 * m), hf, accent, 86) + 50
     entries = tl.get("entries", [])
-    room = H - 100 - y
+    room = H - 120 - y
     each = room // max(1, len(entries))
     text_lines = 3 if each >= 230 else 2 if each >= 180 else 1 if each >= 140 else 0
     for entry in entries:
-        if y + 90 > H - 80:
+        if y + 90 > H - 100:
             break
         d.ellipse((m, y + 6, m + 20, y + 26), fill=accent)
         d.text((m + 44, y), entry.get("when", "").upper(), font=font("medium", 24), fill=SOFT_INK)
@@ -374,6 +425,7 @@ def card_timeline(ex, accent, size=(1080, 1350)):
             tf = font("regular", 27)
             ny = draw_lines(d, (m + 44, ny + 6), fit_sentences(entry["text"].replace("*", ""), tf, W - 2 * m - 44, text_lines, clip=False), tf, SOFT_INK, 38)
         y = max(ny + 34, y + min(each, 400))
+    credit(d, ex, W, H)
     return c
 
 
@@ -389,8 +441,10 @@ def card_story(ex, accent, cover, size=(1080, 1920)):
     tf = font("medium", 92)
     lines = clamp_lines(wrap(ex["title"], tf, W - 2 * m), 3)
     draw_lines(d, (m, y + 58), lines, tf, accent, 100)
-    d.text((m, H - 190), tombstone_artist(ex.get("artist")), font=font("semibold", 34), fill=INK)
-    d.text((m, H - 142), f"{len(ex['works'])} works. Now on view.", font=font("regular", 32), fill=SOFT_INK)
+    d.text((m, H - 210), tombstone_artist(ex.get("artist")), font=font("semibold", 34), fill=INK)
+    d.text((m, H - 162), f"{len(ex['works'])} works. Now on view.", font=font("regular", 32), fill=SOFT_INK)
+    if credits_on(ex):
+        d.text((m, H - 70), "Make your own: " + CREDIT_LINE.split("\u00b7")[-1].strip(), font=font("medium", 28), fill=SOFT_INK)
     return c
 
 
@@ -400,7 +454,9 @@ def caption(ex):
     tags = share.get("hashtags") or ["#MyGuggenheim"]
     if "#MyGuggenheim" not in tags:
         tags = tags + ["#MyGuggenheim"]
-    return f"{text}\n\n{' '.join(tags)}\n"
+    made = (f"\n\nMade with My Guggenheim, free and open source. Turn your own camera roll into a "
+            f"museum show: {REPO_URL}") if credits_on(ex) else ""
+    return f"{text}{made}\n\n{' '.join(tags)}\n"
 
 
 # ---------------------------------------------------------------- main

@@ -92,6 +92,10 @@ if "--quick" not in sys.argv:
             break
     else:
         html = (demo / "gallery" / "index.html").read_text(encoding="utf-8")
+        if "github.com/namedtoaster/my-guggenheim" not in html or 'data-net="bluesky"' not in html:
+            errors.append("demo gallery is missing its share buttons or project link")
+        if "github.com/namedtoaster/my-guggenheim" not in (demo / "share" / "caption.txt").read_text():
+            errors.append("demo caption is missing the project link")
         if "Late Suburban Currents" not in html or html.count('class="room') != 6:
             errors.append("demo gallery is missing its title or rooms")
         if not list((demo / "share").glob("film-square.*")):

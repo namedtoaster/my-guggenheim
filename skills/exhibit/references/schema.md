@@ -62,5 +62,6 @@ script checks it and says exactly what to fix.
 | `works[].accession` | no | The small number under the credit line. Defaults to the year and position |
 | `visitor_note` | no | The closing line |
 | `share.caption`, `share.hashtags` | no | Written to `share/caption.txt`. `#MyGuggenheim` is always added |
+| `share.credit` | no | `false` removes the project line from the cards, film and caption. Leave it on unless asked |
 
 No long dashes (em or en) anywhere. The build fails on them.

@@ -13,6 +13,10 @@ try:
 except ImportError:  # pragma: no cover
     sys.exit("Pillow is missing. Install it with:  python3 -m pip install pillow")
 
+REPO_URL = "https://github.com/namedtoaster/my-guggenheim"
+REPO_SHORT = "github.com/namedtoaster/my-guggenheim"
+CREDIT_LINE = f"Made with My Guggenheim  \u00b7  {REPO_SHORT}"
+
 SKILL_DIR = Path(__file__).resolve().parent.parent
 FONT_DIR = SKILL_DIR / "assets" / "fonts"
 
@@ -220,3 +224,8 @@ def accent_color(ex):
     if dark and light < 0.35:  # mix toward white until it reads on a dark wall
         color = tuple(int(c + (255 - c) * 0.45) for c in color)
     return color
+
+
+def credits_on(ex):
+    """Shared files carry a small line about the project unless the show turns it off."""
+    return (ex.get("share") or {}).get("credit", True) is not False

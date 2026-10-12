@@ -3,6 +3,23 @@
 What to offer once the show is built. Pick what fits the person's setup; don't list
 everything.
 
+## Every share points back here
+
+So that people who see a show can make their own, everything shareable carries the
+project's name and link, small and quiet:
+
+- **Cards and story cover:** a line at the foot, "Made with My Guggenheim" and the link.
+- **Film:** the closing frame says "Make your own" with the link.
+- **Caption:** a sentence with the link, before the hashtags. Instagram does not make
+  caption links clickable, so the story cover and film carry it as text as well.
+- **Gallery page:** a "Make your own" box, a line at the top, and share buttons for
+  X, Bluesky, Threads, Facebook, LinkedIn, Reddit and email, filled in with the show's
+  title and the link. Opened from a file, they share the project; hosted, they share
+  the show and the project.
+
+If someone asks for a show without it, set `"share": {"credit": false}` in
+`exhibition.json`. The page keeps its small footer link either way.
+
 ## Posting it
 
 | Where | What to post | Notes |

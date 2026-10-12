@@ -22,6 +22,7 @@ import sys
 from pathlib import Path
 
 from common import (
+    REPO_SHORT, credits_on,
     accent_color, wall_colors,
     INK, SOFT_INK, WALL, Image, ImageDraw, clamp_lines, draw_lines, first_sentences, fit_inside,
     fit_sentences, font, hex_to_rgb, load_json, open_photo, tombstone_artist, wrap,
@@ -204,8 +205,10 @@ def scene_end(ex, W, H, fmt):
     y = draw_lines(note.draw, (m, y), lines, nf, INK, int(68 * s))
     credit.draw.text((m, y + int(70 * s)), f"{tombstone_artist(ex.get('artist'))}. Collection of the artist.",
                      font=font("regular", int(32 * s)), fill=SOFT_INK)
-    credit.draw.text((m, H - int(140 * s)), "Made with My Guggenheim", font=font("medium", int(30 * s)), fill=SOFT_INK)
-    frames = int(3.6 * FPS)
+    if credits_on(ex):
+        credit.draw.text((m, H - int(190 * s)), "Make your own. Made with My Guggenheim", font=font("medium", int(34 * s)), fill=INK)
+        credit.draw.text((m, H - int(140 * s)), REPO_SHORT, font=font("regular", int(32 * s)), fill=SOFT_INK)
+    frames = int(4.4 * FPS)
 
     def animate(i):
         sec = i / FPS

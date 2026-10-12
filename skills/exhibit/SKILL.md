@@ -128,6 +128,8 @@ Tell the person, briefly:
    fits their setup. If you can publish an HTML page as an artifact or a link, offer
    to publish `gallery/index.html`. It is a private page until they share it.
 4. That the film has no music on purpose: add a sound in the app they post from.
+5. That every card, the film, the caption and the page carry a small "Made with My
+   Guggenheim" line and link, so friends can make their own. It can be turned off.
 
 Then offer one round of changes: a different mood, a renamed work, a photo dropped or
 added, a longer timeline. Edit `exhibition.json` (or run `inspect_photos.py` again for

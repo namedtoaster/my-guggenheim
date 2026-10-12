@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0 (2026-10-12)
+
+Every share points back here.
+
+- Cards, the story cover, the film's closing frame and the caption carry a small
+  "Made with My Guggenheim" line with the project link.
+- The gallery page gains a "Make your own" box and share buttons for X, Bluesky,
+  Threads, Facebook, LinkedIn, Reddit and email, filled in with the show and the link.
+- `"share": {"credit": false}` turns the project line off.
+
 ## 0.4.0 (2026-10-12)
 
 Any mood.
