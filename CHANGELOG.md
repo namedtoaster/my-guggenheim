@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.0 (2026-10-12)
+
+A real exhibition.
+
+- `showcase/nothing-holds-still/`: the author's own show, fifteen photos in the
+  Existential mood, published with every face, name, number plate and personal
+  detail blacked out. Photos with faces were left out. The README features it.
+- Showcase images may carry no camera data at all, and showcase gallery pages may
+  load nothing from the internet. Validation checks both.
+
 ## 0.7.1 (2026-10-12)
 
 - PRIVACY.md: My Guggenheim collects, stores, uploads and sells nothing, and says

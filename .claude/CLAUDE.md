@@ -11,6 +11,8 @@
   which git ignores. `scripts/validate.py` enforces this and runs before every commit
   (`scripts/hooks/pre-commit`, turned on by the session start hook in
   `.claude/settings.json`) and in CI. Never bypass it with `--no-verify`.
-- Showcase material in the repo (README images, examples) is drawn by
-  `examples/make_demo_photos.py`, never photographed.
+- README images and examples are drawn by `examples/make_demo_photos.py`. The one
+  exception is `showcase/`: exhibitions their owner chose to publish, with every
+  face, name, plate and personal detail blacked out and no camera data in any image.
+  Add to it only when the owner asks, and check every image by eye first.
 - No long dashes (em or en) anywhere. Plain words.

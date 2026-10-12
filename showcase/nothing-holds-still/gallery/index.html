@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nothing Holds Still</title>
+<meta name="description" content="The photographers of the early twenty-first century carried their cameras everywhere and pointed them, most of the time, at nothing in particular: a carpet, a case, a moth on a wall.">
+<meta property="og:title" content="Nothing Holds Still">
+<meta property="og:description" content="The photographers of the early twenty-first century carried their cameras everywhere and pointed them, most of the time, at nothing in particular: a carpet, a case, a moth on a wall.">
+<meta property="og:site_name" content="My Guggenheim">
+<meta name="generator" content="My Guggenheim (https://github.com/namedtoaster/my-guggenheim)">
+<style>
+:root { --wall: #151514; --ink: #eceae4; --soft: #9e9c96; --rule: #3a3936; --accent: #6ea6ff; --shadow: 0 18px 40px -12px rgba(0,0,0,.7); color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--wall); color: var(--ink);
+  font: 17px/1.55 Inter, "Helvetica Neue", -apple-system, "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+.panel { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; max-width: 820px; padding: 12vh 0; }
+.kicker { font-size: clamp(18px, 2.4vw, 26px); margin: 0 0 .1em; font-weight: 500; }
+h1 { color: var(--accent); font-size: clamp(40px, 7.4vw, 84px); line-height: 1.02; margin: 0 0 .6em; font-weight: 500; letter-spacing: -.02em; }
+.panel p { font-size: clamp(17px, 2vw, 21px); margin: 0 0 1.1em; }
+.byline { color: var(--soft); font-size: 15px !important; }
+.room { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 56px; align-items: start;
+  min-height: 88vh; padding: 9vh 0; border-top: 1px solid var(--rule); }
+.room.portrait { grid-template-columns: minmax(0, .85fr) 420px; }
+figure { position: sticky; top: 6vh; }
+.tombstone .acc { color: var(--soft); font-size: 13px; margin-top: .4em; }
+.section-panel { border-top: 1px solid var(--rule); padding: 14vh 0 10vh; max-width: 760px; }
+.section-panel h2 { color: var(--accent); font-size: clamp(30px, 4.6vw, 52px); font-weight: 500; margin: 0 0 .7em; letter-spacing: -.01em; }
+.section-panel p { font-size: clamp(17px, 1.9vw, 20px); margin: 0 0 1em; }
+.section-panel .kicker { font-size: 15px; color: var(--soft); letter-spacing: .04em; text-transform: uppercase; }
+figure { margin: 0; display: flex; justify-content: center; }
+figure img { max-width: 100%; max-height: 78vh; width: auto; height: auto; box-shadow: var(--shadow); background: #ccc; }
+.label { font-size: 16px; line-height: 1.6; padding-top: 2vh; }
+.label .number { color: var(--soft); font-size: 13px; margin: 0 0 1em; }
+.tombstone p { margin: 0; }
+.tombstone .artist { font-weight: 600; }
+.tombstone { margin-bottom: 1.2em; }
+.text p { margin: 0 0 .9em; }
+.timeline { border-top: 1px solid var(--rule); padding: 12vh 0; }
+.timeline h2 { color: var(--accent); font-size: clamp(32px, 5vw, 56px); font-weight: 500; margin: 0 0 1em; letter-spacing: -.01em; }
+.timeline ol { list-style: none; margin: 0; padding: 0 0 0 28px; border-left: 2px solid var(--rule); max-width: 760px; }
+.timeline li { position: relative; padding: 0 0 2.6em; }
+.timeline li::before { content: ""; position: absolute; left: -36px; top: .45em; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+.timeline .when { color: var(--soft); margin: 0; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+.timeline h3 { margin: .1em 0 .4em; font-size: 22px; font-weight: 600; }
+.timeline p { margin: 0 0 .8em; }
+.thumbs { display: flex; flex-wrap: wrap; gap: 8px; }
+.thumbs img { height: 64px; width: auto; display: block; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+footer { border-top: 1px solid var(--rule); padding: 10vh 0 14vh; max-width: 680px; }
+footer .note { font-size: 21px; margin: 0 0 1.4em; }
+footer small { color: var(--soft); display: block; margin-top: 2em; font-size: 13px; }
+footer a { color: inherit; }
+.make { margin: 3em 0 0; padding: 1.4em 1.5em; border: 1px solid var(--rule); border-radius: 14px; }
+.make h2 { font-size: 22px; font-weight: 600; margin: 0 0 .3em; }
+.make p { margin: 0 0 1em; color: var(--soft); }
+.make a.cta { display: inline-block; padding: .55em 1.1em; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; }
+.shares { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1em; }
+.shares a, .shares button { font-size: 14px; padding: .45em .95em; border-radius: 999px; border: 1px solid var(--rule); color: var(--ink); text-decoration: none; background: transparent; }
+.topline { font-size: 13px; color: var(--soft); padding-top: 18px; }
+.topline a { color: inherit; }
+button { font: inherit; font-size: 15px; padding: .55em 1.1em; border-radius: 999px; border: 1px solid var(--ink);
+  background: transparent; color: var(--ink); cursor: pointer; }
+button:hover { background: var(--ink); color: var(--wall); }
+@media (max-width: 820px) {
+  .room, .room.portrait { grid-template-columns: minmax(0, 1fr); gap: 28px; min-height: 0; padding: 8vh 0; }
+  figure { position: static; }
+  figure img { max-height: 72vh; }
+  body { font-size: 16px; }
+}
+@media print { .room { break-inside: avoid; min-height: 0; } button { display: none; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+<p class="topline">A personal exhibition made with <a href="https://github.com/namedtoaster/my-guggenheim">My Guggenheim</a>. <a href="https://github.com/namedtoaster/my-guggenheim">Make your own</a></p>
+<header class="panel">
+  <p class="kicker">An Existential Rehang</p>
+  <h1>Nothing Holds Still</h1>
+  <p>The photographers of the early twenty-first century carried their cameras everywhere and pointed them, most of the time, at nothing in particular: a carpet, a case, a moth on a wall. This exhibition takes them at their word. It proposes that nothing in particular is exactly where a life is lived, and that a camera roll is less a record of what happened than evidence that someone was there to notice it.</p><p>Between December 2025 and September 2026, the artist crossed the Pacific, from Los Angeles to Sydney, and on to Bali and Vanuatu, and the pictures crossed with them. Yet the subject of the work is not travel. It is waiting, packing, checking, looking down and looking up. It is a dog that will not hold still and a koala that will not wake up. It is the long middle of things, where most of any year takes place.</p><p>The work stands in a tradition of art that sits with uncertainty instead of resolving it: Mark Rothko&#x27;s dark late paintings, Edward Hopper&#x27;s rooms in which someone waits for something that does not arrive, the date paintings of On Kawara, which say only that a day happened. Albert Camus wrote that the absurd is born of the meeting between our need for meaning and the silence of the world. This rehang does not try to break that silence. It suggests that a photograph is one of the ways we keep each other company inside it. The museum is aware that this is a great deal to ask of a picture of a carpet.</p><p>Drawn from the artist&#x27;s camera roll, <em>Nothing Holds Still</em> explores a year in which the artist kept choosing, again and again, to notice. It does not say what any of it means. It suggests only that the noticing was not nothing.</p>
+  <p class="byline">15 works by The Artist. Collection of the artist.</p>
+</header>
+
+<section class="section-panel">
+  <p class="kicker">Gallery 1 &middot; December 2025</p>
+  <h2>Before Leaving</h2>
+  <p>The first room holds the last weeks in Los Angeles. Nothing dramatic happens in it. A dog searches a bed, a carpet is looked at, a case is packed. This is how most departures look from the inside: not like an ending, but like a series of ordinary evenings in which something is quietly being decided. Look for the closed things in this room, and for the one figure who is searching.</p>
+</section>
+<section class="room portrait" id="img-0581">
+  <figure><img src="images/img-0581.jpg" alt="A blurry brown and white dog with its head buried in a beige duvet on a bed."
+    width="4284" height="5712"></figure>
+  <aside class="label">
+    <p class="number">1</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>The Dog Does Not Wait</em>, December 2025</p><p>Digital photograph (iPhone 15 Pro Max), 1/30 second, taken at 2:20 p.m.</p><p>4,284 × 5,712 pixels</p><p>Collection of the artist</p><p class="acc">2026.1</p></div>
+    <div class="text"><p>A dog plunges its head into a rumpled beige duvet, and the camera, at one thirtieth of a second, cannot hold it. What remains is a smear of brown and white where a face should be, and around it the folds of the bedding, perfectly sharp and perfectly indifferent. The bed is the only thing in the picture that is not going anywhere.</p><p>In 1912 the Futurist Giacomo Balla painted a dachshund&#x27;s legs multiplied into a blur, convinced that speed was the poetry of the modern age. The artist&#x27;s blur proposes something quieter: that every living thing is already on its way somewhere else, and that a photograph can only ever prove that it was here a moment ago.</p><p>This is the earliest work in the exhibition, made on an ordinary December afternoon in Los Angeles. The dog is searching for something under the covers. It is the first figure in the show to search, and it will not be the last. Whether it found anything, the archive does not record. The searching, the museum suggests, may have been the point.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-0783">
+  <figure><img src="images/img-0783.jpg" alt="A close up of a shaggy grey and white carpet, with a little pink at the bottom edge."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">2</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Ground (Grey)</em>, December 2025</p><p>Digital photograph (iPhone 15 Pro Max, ultra wide lens), ISO 800, taken at 2:59 p.m.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.2</p></div>
+    <div class="text"><p>A carpet, seen from directly above, extends to every edge of the frame and, we must assume, beyond it. There is no horizon. There is no furniture, no door, no indication of where the room ends or why it began. Thousands of identical grey loops each cast their own small shadow, as if each had been asked to account for itself and could not. At the lower edge, a single pink shape, a sock perhaps, confirms that someone is standing here, and that they have looked down.</p><p>Mark Rothko spent his last years painting fields of dark color that offer the eye nowhere to rest and nothing to hold. Standing before them, visitors report a feeling that is hard to name and harder to leave. The artist&#x27;s carpet produces a related effect at a fraction of the scale. It is an all over surface, a field without a figure, and the figure, when it arrives, is only a foot.</p><p>Camus asked us to imagine Sisyphus happy, pushing his rock up the hill forever. The carpet asks something smaller. Much of any year is spent looking at the floor, waiting for the next thing. The artist looked, and then took a picture of it. That is not nothing. It may be most of it.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-0957">
+  <figure><img src="images/img-0957.jpg" alt="A large black hard case on a wooden floor with several suitcases lined up behind it."
+    width="4284" height="5712"></figure>
+  <aside class="label">
+    <p class="number">3</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Case, Packed</em>, December 2025</p><p>Digital photograph (iPhone 15 Pro Max), ISO 1000, taken at 8:54 p.m. Details redacted for public display.</p><p>4,284 × 5,712 pixels</p><p>Collection of the artist</p><p class="acc">2026.3</p></div>
+    <div class="text"><p>A black hard case, shut and latched, waits on a pale wooden floor. Behind it a row of suitcases leans against the wall like people at a bus stop, each one closed around its own contents. A corner of white bedding enters the frame. It is 8:54 in the evening. Nothing in the room is unpacked, and nothing in the room has left.</p><p>Samuel Beckett&#x27;s <em>Waiting for Godot</em> (1953) gives us two figures who wait for someone who never comes, and who say &quot;Let&#x27;s go&quot; and do not move. The case is their opposite. It knows exactly where it is going. Only the person who packed it must decide, again in the morning, to pick it up.</p><p>Every departure is a small rehearsal of a larger one, and the case is a sealed record of what one person decided they could not do without. The museum has not opened it. Some things are better kept as decisions than turned into inventories.</p></div>
+  </aside>
+</section>
+<section class="section-panel">
+  <p class="kicker">Gallery 2 &middot; January to February 2026</p>
+  <h2>Arrival</h2>
+  <p>On the other side of the Pacific, it is summer. The works in this room were made in the first weeks of a new life, and they are full of thresholds: a dessert held up before it melts, two shapes on a wall that have not decided what they are, a bicycle about to go somewhere, and a koala that has opted out of the whole question. Look at how often the artist photographs the moment just before.</p>
+</section>
+<section class="room portrait" id="img-1238">
+  <figure><img src="images/img-1238.jpg" alt="A hand holding up a cup of gelato with a wafer in a corridor hung with paper lanterns."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">4</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>A Brief Sweetness</em>, January 2026</p><p>Digital photograph (iPhone 15 Pro Max), taken at 9:52 p.m.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.4</p></div>
+    <div class="text"><p>In a long arcade hung with paper lanterns, a hand lifts a cup of gelato toward the light. The two scoops and their round wafer are the only things in focus. Everything else, the lanterns, the corridor, the escalator rising out of sight at the far end, has gone soft, as if the world had agreed to step back for a moment and let this be the center of it.</p><p>The Dutch painters of the 1600s set guttering candles and half eaten fruit into their still lifes as reminders that pleasure and time move together. This picture is a vanitas in which the candle is a lantern and the fruit is gelato. The lanterns burn without warmth, the gelato melts without hurry, and the photograph holds both in the same instant.</p><p>It is the first work made after the crossing, on a summer night in early January in Sydney. A new city, a new hemisphere, and the first act of the new life is to hold something sweet up to the light before it disappears. The museum considers this a reasonable philosophy.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="c2858f89-9487-42ac-92d7-b66d711eb842">
+  <figure><img src="images/c2858f89-9487-42ac-92d7-b66d711eb842.jpg" alt="Two dark crescent shaped objects mounted one above the other on a cream wall in dim light."
+    width="2160" height="3840"></figure>
+  <aside class="label">
+    <p class="number">5</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Two Crescents (Undecided)</em>, January 2026</p><p>Digital photograph (iPhone 15 Pro Max), ISO 3200</p><p>2,160 × 3,840 pixels</p><p>Collection of the artist</p><p class="acc">2026.5</p></div>
+    <div class="text"><p>Two dark crescents project from a pale wall, one above the other, curving toward each other without touching. The light is low and the grain is heavy, so that the forms seem less like objects than like shadows that have decided to stay. Their function is unknown. They hold nothing. They may once have held something.</p><p>Jean Arp believed art should grow in a person the way fruit grows on a plant, without needing to be explained. Mark Rothko, in his late paintings, stacked dark shapes on darker grounds until their edges seemed to breathe. These crescents belong to the same family of quiet presences: things that do not tell you what they are for, and wait for you to stop asking.</p><p>Jean-Paul Sartre wrote that for human beings, existence precedes essence: we are here first, and only afterward decide what we are for. The crescents appear to be in the middle of that decision. So, in the second week of January, in a new city, was the artist. The museum leaves both undecided.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-1528">
+  <figure><img src="images/img-1528.jpg" alt="A close up of a bicycle handlebar with a brake lever, cables and part of a rider&#x27;s knee."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">6</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Brake, Night</em>, February 2026</p><p>Digital photograph (iPhone 15 Pro Max, ultra wide lens), ISO 1250, taken at 9:59 p.m.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.6</p></div>
+    <div class="text"><p>The rider&#x27;s view at ten at night: a brake lever, a grip, a knot of cables, the dull shine of a hub, and at the edge a knee in dark denim. The ultra wide lens bends the handlebar into an arc, as though the bicycle were curling around the person who will ride it. Nothing in the picture is moving yet.</p><p>In 1913 Marcel Duchamp fixed a bicycle wheel upside down to a stool and set it spinning in his studio, a wheel that turned and went nowhere. He said he enjoyed looking at it the way one enjoys watching flames in a fireplace. The artist&#x27;s bicycle is his wheel reversed: it is still, and it is about to go somewhere.</p><p>The brake is the most philosophical part of any machine. It exists only to say no: to stop, to hold back the thing that wants to continue. The picture is taken with a hand near the lever, at the hour when most people are already home. The museum cannot say whether the artist was about to leave or had just arrived. It suspects the artist could not have said either.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-1776">
+  <figure><img src="images/img-1776.jpg" alt="A koala asleep in the fork of a eucalyptus tree, surrounded by green leaves, with a grey pole beside the tree."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">7</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Sleeper</em>, February 2026</p><p>Digital photograph (iPhone 15 Pro Max, telephoto lens), taken at 4:17 p.m.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.7</p></div>
+    <div class="text"><p>In the fork of a eucalyptus tree, a koala sleeps with its face pressed into its own grey fur, arms around the trunk. Long leaves surround it in a loose green halo, lit from behind by the afternoon. Beside the tree stands a grey pole, plain and upright, belonging to the city. The animal has chosen this branch, with this view, and closed its eyes on all of it.</p><p>In the 1600s Blaise Pascal wrote that all of humanity&#x27;s problems stem from our inability to sit quietly in a room alone. The koala has no such problem. It spends most of the day asleep, and appears to feel no obligation to explain itself, to be productive, or to be photographed.</p><p>The artist uses the telephoto lens to come close without disturbing anything, which may be the most respectful gesture in the exhibition. Of all the figures in this show, the koala alone has made peace with the passing of time, by declining to watch it pass. The museum regards it with something close to envy.</p></div>
+  </aside>
+</section>
+<section class="section-panel">
+  <p class="kicker">Gallery 3 &middot; March 5, 2026</p>
+  <h2>Five Hours</h2>
+  <p>This room covers a single afternoon in Bali, between 1:15 and 6:22. In five hours the artist moved from power lines and an empty lot to a corner covered in other people&#x27;s names, and finally to a temple wall as the light went. Read the room in order. It is a small life in itself: noise, emptiness, the wish to leave a mark, and then something older that asks for silence.</p>
+</section>
+<section class="room portrait" id="img-2088">
+  <figure><img src="images/img-2088.jpg" alt="A large dark multi storey building with tiered roofs behind many overhead power lines, with a streetlamp and flower beds."
+    width="4284" height="5712"></figure>
+  <aside class="label">
+    <p class="number">8</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Building, through Wires</em>, March 2026</p><p>Digital photograph (iPhone 15 Pro Max), 1/2833 second, taken at 1:15 p.m. Details redacted for public display.</p><p>4,284 × 5,712 pixels</p><p>Collection of the artist</p><p class="acc">2026.8</p></div>
+    <div class="text"><p>A dark building with tiered roofs stands behind a net of overhead cables at 1:15 on a bright afternoon. A streetlamp rises in front of it, two black cars wait in the drive, and a band of yellow flowers runs along the wall. The sky is high, clear and very blue. Nothing in the picture is out of place, and nothing in it is quite visible.</p><p>The photographer Lee Friedlander spent decades letting poles and wires interrupt his pictures, refusing to wait for the clean view that never comes. The artist accepts the same arrangement. The building is the subject. The wires are the condition. One never sees anything except through something else.</p><p>This is the first of four photographs made on a single afternoon in Bali, between 1:15 and 6:22. It begins the shortest period in the artist&#x27;s life and one of the most attentive. Five hours, four pictures. The museum notes that this is roughly the span of a day&#x27;s real attention in any life, and that most days do not leave four pictures behind.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-2107">
+  <figure><img src="images/img-2107.jpg" alt="A wide, mostly empty paved lot with red tile roofed buildings, parked cars, a distant golden dome and blue sky."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">9</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Lot, Midafternoon</em>, March 2026</p><p>Digital photograph (iPhone 15 Pro Max, ultra wide lens), taken at 2:09 p.m. Number plates redacted for public display.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.9</p></div>
+    <div class="text"><p>An empty paved lot stretches under an enormous sky. Red tile roofs line one side, a few cars rest in their shade, and far away a golden dome catches the sun. In the foreground, a broken curb and a strip of weeds lead nowhere in particular. It is 2:09 in the afternoon, the hour when shadows are shortest and there is the least to hide behind.</p><p>In 1975 the New Topographics photographers turned their cameras on parking lots, warehouses and tract houses, insisting that the places people actually build deserve the attention we give to mountains. Their pictures are flat and patient and refuse to be beautiful. They are also, if you stand in front of them long enough, strangely moving.</p><p>The lot is a space designed for arriving and leaving, and almost no one is doing either. The weeds have begun to take back the edges, slowly, without asking. The artist stood in the heat long enough to take a picture, which is to say long enough to be, briefly, the only thing in the lot that was paying attention.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-2108">
+  <figure><img src="images/img-2108.jpg" alt="A graffiti covered electrical box strapped to a pole on a street corner, with a banner overhead and a brick sidewalk."
+    width="4284" height="5712"></figure>
+  <aside class="label">
+    <p class="number">10</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>I Was Here (Box, Pole, Banner)</em>, March 2026</p><p>Digital photograph (iPhone 15 Pro Max), taken at 2:11 p.m.</p><p>4,284 × 5,712 pixels</p><p>Collection of the artist</p><p class="acc">2026.10</p></div>
+    <div class="text"><p>Two minutes later, the artist turns to a crowded corner. A metal box strapped to a pole is covered in tags, layered and overlapping and half legible, written by hands that never met. Above, the corner of a banner flaps into the frame. The sidewalk runs away to the right into bright shade.</p><p>Every tag is a person saying, in the plainest possible terms, I was here. In the late 1970s Jean-Michel Basquiat wrote cryptic messages signed SAMO across the walls of New York before carrying the same urgent handwriting onto canvas. The box carries no message as clear as his, and every message at once: a name, another name written over it, and the weather slowly erasing both.</p><p>Beside the empty lot made two minutes earlier, the picture completes a pair. One shows a surface no one has marked. The other shows a surface everyone has. Both, the museum suggests, answer the same question: what does it mean to leave a trace on a world that will not keep it? The artist&#x27;s answer, characteristically, was to take a photograph.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-2112">
+  <figure><img src="images/img-2112.jpg" alt="A carved dark stone guardian figure on a mossy temple wall in front of tiered thatched shrine roofs, under an evening sky."
+    width="4284" height="5712"></figure>
+  <aside class="label">
+    <p class="number">11</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Guardian and Tiered Roofs, Evening</em>, March 2026</p><p>Digital photograph (iPhone 15 Pro Max), taken at 6:22 p.m.</p><p>4,284 × 5,712 pixels</p><p>Collection of the artist</p><p class="acc">2026.11</p></div>
+    <div class="text"><p>In the soft light of early evening, a carved stone guardian rises from a temple wall, dense with ornament and darkened by age. Behind it, tiered thatched roofs, the shrines called meru, stack toward a pale sky. Moss covers the top of the wall, and a frangipani branch reaches in from the edge of the frame.</p><p>The stone was carved by hands working in a tradition far older than the camera, and far older than the questions this exhibition likes to ask. The moss has been growing on it for longer than the artist has been alive. Whatever the guardian keeps watch over, it has been doing so patiently, in every weather, without needing to be seen.</p><p>This is the last of the four works made in Bali on that afternoon in March. The day began with wires and an empty lot and ends here, as the light goes, in front of something made to last. The museum lowers its voice for this one, and invites the visitor to do the same.</p></div>
+  </aside>
+</section>
+<section class="section-panel">
+  <p class="kicker">Gallery 4 &middot; April to June 2026</p>
+  <h2>The Waiting Months</h2>
+  <p>Between journeys, the artist photographed a crate being filled for the next departure. This is the room of preparation, the long middle where most of any year is spent. Look at what has been chosen, and at what was left out.</p>
+</section>
+<section class="room portrait" id="img-2794">
+  <figure><img src="images/img-2794.jpg" alt="Looking down into a wooden crate holding a soccer ball, a camera monitor, straps, a headlamp and a paper star."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">12</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>What to Bring</em>, June 2026</p><p>Digital photograph (iPhone 15 Pro Max), taken at 4:03 p.m.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.12</p></div>
+    <div class="text"><p>Looking down into a raw pine crate: a white football with flame markings, a camera monitor, a tangle of straps and cables, a headlamp, a torch, and the point of a woven paper star. Below the crate, the artist&#x27;s knees. The light is warm and even. Two small dark specks rest on the floor of the box, the only things in it that were not chosen.</p><p>Joseph Cornell spent decades arranging small objects in wooden boxes, marbles and maps and paper birds, building whole worlds out of what would fit. His boxes are tender and slightly unbearable, because they show how much a person can love and how little a person can carry.</p><p>This crate is a working version of the same idea. What do you bring, when you cannot bring everything? The artist&#x27;s answer, in early June, was a ball, a light, a camera and a star: something to play with, something to see by, something to remember with, and something for no reason at all. The museum finds the last the most persuasive.</p></div>
+  </aside>
+</section>
+<section class="section-panel">
+  <p class="kicker">Gallery 5 &middot; July 15, 2026</p>
+  <h2>One Day in July</h2>
+  <p>Two pictures from the same day in Vanuatu, five hours apart. The first is the most familiar image in the exhibition: palms, water, a low sun. The second is the least: a moth on a wall in the dark. Stand between them and decide which one the day was really about. The museum has its suspicions.</p>
+</section>
+<section class="room landscape" id="img-3408">
+  <figure><img src="images/img-3408.jpg" alt="A resort lawn with tall palm trees and a curving lagoon pool under a low sun and a sky full of small clouds."
+    width="4032" height="3024"></figure>
+  <aside class="label">
+    <p class="number">13</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Is This It (Palms, Pool, Sun)</em>, July 2026</p><p>Digital photograph (iPhone 15 Pro Max, ultra wide lens), 1/5650 second, taken at 4:15 p.m. A figure and details redacted for public display.</p><p>4,032 × 3,024 pixels</p><p>Collection of the artist</p><p class="acc">2026.13</p></div>
+    <div class="text"><p>The only landscape format work in the exhibition opens wide: palms leaning in, a lawn dotted with red flowers, a curving lagoon pool, and the sun burning low through a sky full of small clouds. The exposure lasts a fraction of a millisecond, and the trees have gone nearly black against the glare. It is 4:15 in the afternoon in Vanuatu.</p><p>This is the picture of paradise, and it is very old. Paul Gauguin sailed to Tahiti in 1891 to find it, and painted it as untouched, which it was not. Vanuatu, where this was made, was governed jointly by Britain and France until its independence in 1980. Paradise has always been somewhere that someone else lives.</p><p>The artist stands at the edge of the lawn with everyone&#x27;s idea of happiness laid out in front of them: sun, water, palms. It is genuinely beautiful. It also has a filtration system. Camus wrote that one must imagine Sisyphus happy. The museum suggests one must also imagine the person at the edge of paradise, wondering quietly whether this is it.</p></div>
+  </aside>
+</section>
+<section class="room portrait" id="img-3409">
+  <figure><img src="images/img-3409.jpg" alt="A large brown moth with white bands and scalloped wings spread flat against a pale wall at night."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">14</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Moth, Nine O&#x27;Clock</em>, July 2026</p><p>Digital photograph (iPhone 15 Pro Max, ultra wide lens), ISO 2500, taken at 9:01 p.m.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.14</p></div>
+    <div class="text"><p>A large moth rests flat against a pale wall, wings spread in perfect symmetry, dark brown crossed by a bright white band, the edges scalloped like torn paper. It is nine at night and the camera has had to strain to see it. The grain is heavy. The moth is completely still.</p><p>Moths fly toward light, and for centuries people said they were drawn to it. Recent research suggests something stranger: confused by any bright thing, they tilt their backs toward it as if it were the sky. Either way, they come, and they stay. In 1921 Hermann Rorschach asked people what they saw in symmetrical inkblots. This shape asks the question back.</p><p>Made five hours after the palms and the pool, the work shows the other side of the same day. The moth came to the light. The artist came to the moth. For a moment, on a wall in Vanuatu, two creatures who did not entirely know why they were there regarded each other, and one of them took a picture.</p></div>
+  </aside>
+</section>
+<section class="section-panel">
+  <p class="kicker">Gallery 6 &middot; September 1, 2026</p>
+  <h2>Above</h2>
+  <p>The final room holds a single work: the coast, seen from a small plane on the first morning of spring. After a year spent looking down at floors and crates and carpets, the artist looks down at everything at once. It does not answer anything. It is simply very large, and very blue, and seen through glass.</p>
+</section>
+<section class="room portrait" id="img-3850">
+  <figure><img src="images/img-3850.jpg" alt="An aerial view from a small plane window of a coastline with beaches, green hills and deep blue water, with the white wing in the foreground."
+    width="3024" height="4032"></figure>
+  <aside class="label">
+    <p class="number">15</p>
+    <div class="tombstone"><p class="artist">The Artist</p><p class="work-title"><em>Above (Wing, Coast, Morning)</em>, September 2026</p><p>Digital photograph (iPhone 15 Pro Max, ultra wide lens), taken at 10:18 a.m.</p><p>3,024 × 4,032 pixels</p><p>Collection of the artist</p><p class="acc">2026.15</p></div>
+    <div class="text"><p>From the window of a small aircraft, the coast unrolls below: headlands, bays, a ribbon of beach, green suburbs climbing the hills, and deep blue water marked with white. The wing, white with a single red stripe, cuts into the lower left. Scratches on the window catch the sun, and a faint reflection of the cabin hangs in the sky like a ghost.</p><p>In 1858 the photographer Nadar rose in a balloon over Paris and made what are often called the first aerial photographs. From above, the city became a pattern, and everyone in it too small to see. Every view from above is a little like that. Everything is visible, and nothing is close.</p><p>This is the last work in the exhibition, made on the first morning of spring. The year began with a dog digging into a bed, and ends with the whole coast at once, seen through scratched glass. The artist has risen above all of it, and is still, unmistakably, inside something. The plane will land. The next exhibition is already being made.</p></div>
+  </aside>
+</section>
+
+<section class="timeline" id="timeline">
+  <p class="kicker">Chronology</p>
+  <h2>The Artist&#x27;s Life</h2>
+  <ol>
+  <li>
+    <p class="when">December 2025</p>
+    <h3>Before Leaving</h3>
+    <p>A dog, a floor, a case.</p>
+    <div class="thumbs"><a href="#img-0581"><img src="images/img-0581-thumb.jpg" alt=""></a><a href="#img-0783"><img src="images/img-0783-thumb.jpg" alt=""></a><a href="#img-0957"><img src="images/img-0957-thumb.jpg" alt=""></a></div>
+  </li>
+  <li>
+    <p class="when">January to February 2026</p>
+    <h3>Arrival</h3>
+    <p>A new hemisphere. Something sweet, something undecided, a brake, a sleeper.</p>
+    <div class="thumbs"><a href="#img-1238"><img src="images/img-1238-thumb.jpg" alt=""></a><a href="#c2858f89-9487-42ac-92d7-b66d711eb842"><img src="images/c2858f89-9487-42ac-92d7-b66d711eb842-thumb.jpg" alt=""></a><a href="#img-1528"><img src="images/img-1528-thumb.jpg" alt=""></a><a href="#img-1776"><img src="images/img-1776-thumb.jpg" alt=""></a></div>
+  </li>
+  <li>
+    <p class="when">March 5, 2026</p>
+    <h3>Five Hours</h3>
+    <p>One afternoon. Four pictures. Wires, an empty lot, a tagged box, a temple at dusk.</p>
+    <div class="thumbs"><a href="#img-2088"><img src="images/img-2088-thumb.jpg" alt=""></a><a href="#img-2107"><img src="images/img-2107-thumb.jpg" alt=""></a><a href="#img-2108"><img src="images/img-2108-thumb.jpg" alt=""></a><a href="#img-2112"><img src="images/img-2112-thumb.jpg" alt=""></a></div>
+  </li>
+  <li>
+    <p class="when">April to June 2026</p>
+    <h3>The Waiting Months</h3>
+    <p>A crate of chosen things.</p>
+    <div class="thumbs"><a href="#img-2794"><img src="images/img-2794-thumb.jpg" alt=""></a></div>
+  </li>
+  <li>
+    <p class="when">July 15, 2026</p>
+    <h3>One Day in July</h3>
+    <p>Paradise at four. A moth at nine.</p>
+    <div class="thumbs"><a href="#img-3408"><img src="images/img-3408-thumb.jpg" alt=""></a><a href="#img-3409"><img src="images/img-3409-thumb.jpg" alt=""></a></div>
+  </li>
+  <li>
+    <p class="when">September 1, 2026</p>
+    <h3>Above</h3>
+    <p>The first morning of spring, seen from the air.</p>
+    <div class="thumbs"><a href="#img-3850"><img src="images/img-3850-thumb.jpg" alt=""></a></div>
+  </li></ol>
+</section>
+<footer>
+  <p class="note">You do not have to read everything. You do not have to understand it. You were here, and you looked. That is most of it.</p>
+  <div class="shares" aria-label="Share">
+    <button type="button" id="share">Share</button>
+    <a data-net="x" href="#">X</a><a data-net="bluesky" href="#">Bluesky</a><a data-net="threads" href="#">Threads</a>
+    <a data-net="facebook" href="#">Facebook</a><a data-net="linkedin" href="#">LinkedIn</a><a data-net="reddit" href="#">Reddit</a>
+    <a data-net="email" href="#">Email</a>
+  </div>
+  <section class="make">
+    <h2>Make your own exhibition</h2>
+    <p>Turn your own camera roll into a museum show, with wall texts, a timeline, cards and a film. Free and open source, and it runs with Claude.</p>
+    <a class="cta" href="https://github.com/namedtoaster/my-guggenheim">My Guggenheim on GitHub</a>
+  </section>
+  <small>Made with <a href="https://github.com/namedtoaster/my-guggenheim">My Guggenheim</a> (github.com/namedtoaster/my-guggenheim). A personal exhibition,
+  not affiliated with the Solomon R. Guggenheim Foundation or any museum.</small>
+</footer>
+</main>
+<script>
+(() => {
+  const repo = "https://github.com/namedtoaster/my-guggenheim";
+  const hosted = location.protocol.startsWith('http');
+  // A hosted gallery shares its own link; a file opened from disk shares the project.
+  const url = hosted ? location.href : repo;
+  const text = "\"Nothing Holds Still\", my camera roll as a museum exhibition. Make your own with My Guggenheim, free and open source:" + (hosted ? " " + repo : "") + " #MyGuggenheim";
+  const enc = encodeURIComponent;
+  const nets = {
+    x: "https://twitter.com/intent/tweet?text=" + enc(text) + "&url=" + enc(url),
+    bluesky: "https://bsky.app/intent/compose?text=" + enc(text + " " + url),
+    threads: "https://www.threads.net/intent/post?text=" + enc(text + " " + url),
+    facebook: "https://www.facebook.com/sharer/sharer.php?u=" + enc(url),
+    linkedin: "https://www.linkedin.com/sharing/share-offsite/?url=" + enc(url),
+    reddit: "https://www.reddit.com/submit?url=" + enc(url) + "&title=" + enc(document.title + ", made with My Guggenheim"),
+    email: "mailto:?subject=" + enc(document.title) + "&body=" + enc(text + "\n\n" + url),
+  };
+  document.querySelectorAll('[data-net]').forEach(a => {
+    a.href = nets[a.dataset.net];
+    if (a.dataset.net !== 'email') { a.target = '_blank'; a.rel = 'noopener'; }
+  });
+  const btn = document.getElementById('share');
+  btn.addEventListener('click', async () => {
+    try {
+      if (navigator.share) { await navigator.share({ title: document.title, text, url }); return; }
+      await navigator.clipboard.writeText(text + " " + url);
+      btn.textContent = 'Copied';
+    } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

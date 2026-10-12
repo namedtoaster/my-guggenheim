@@ -17,9 +17,11 @@ cover and a short vertical film.
 The more random the photos, the better. A parking lot at sunset. A receipt. A blurry
 pigeon. A screenshot from 11:58 p.m.
 
-![Version](https://img.shields.io/badge/version-0.7.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757) ![Privacy](https://img.shields.io/badge/your%20data-never%20collected-2e7d32)
+![Version](https://img.shields.io/badge/version-0.8.0-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757) ![Privacy](https://img.shields.io/badge/your%20data-never%20collected-2e7d32)
 
-![A carousel from the demo show: the wall text, two works and the timeline](docs/images/carousel.png)
+![Cards from a real exhibition, Nothing Holds Still: the intro wall, four works and the timeline, on black walls](showcase/nothing-holds-still/preview/carousel.jpg)
+
+<p align="center"><b>See a real one:</b> <a href="showcase/nothing-holds-still/README.md"><i>Nothing Holds Still</i></a>, fifteen photos from one year, in the Existential mood.</p>
 
 ## Why
 
@@ -115,6 +117,31 @@ own words: "like a nature documentary", "my grandmother wrote it", "sad but funn
 The mood changes the writing, the art history it reaches for, and even the color of
 the walls.
 
+## From a real exhibition
+
+*Nothing Holds Still* is the author's own camera roll, from Los Angeles to Sydney,
+Bali and Vanuatu, curated in the Existential mood. Every face, name and number plate
+is blacked out.
+
+<table>
+<tr>
+<td><img src="showcase/nothing-holds-still/preview/film.gif" alt="The opening of the film for Nothing Holds Still" width="240"></td>
+<td>
+
+> **Ground (Grey)**, 2025
+>
+> A carpet, seen from directly above, extends to every edge of the frame and, we
+> must assume, beyond it. There is no horizon. ... Much of any year is spent
+> looking at the floor, waiting for the next thing. The artist looked, and then
+> took a picture of it. That is not nothing. It may be most of it.
+
+**[Read the whole exhibition](showcase/nothing-holds-still/README.md)** ·
+[Open the gallery page](https://namedtoaster.github.io/my-guggenheim/showcase/nothing-holds-still/gallery/)
+
+</td>
+</tr>
+</table>
+
 ## A label from the demo
 
 > **Pigeon, Possibly**, October 2026
@@ -137,8 +164,8 @@ server, no account, no analytics, no tracking.
 - Your originals are never changed. Shared copies have camera data and GPS removed.
 - Places are named at city level at most. Faces and names can be blacked out first.
 - The gallery page loads nothing from the internet.
-- This repo never holds anyone's photos or personal details, and every commit is
-  checked to keep it that way.
+- This repo never holds your photos or personal details, and every commit is checked
+  to keep it that way. (The showcase is the author's own, published by choice.)
 
 Read the whole promise, including what it can't cover, in [PRIVACY.md](PRIVACY.md).
 

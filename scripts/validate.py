@@ -82,8 +82,10 @@ for path in repo_files():
 # scripts/hooks/pre-commit) and in CI.
 MEDIA = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp", ".gif", ".tif", ".tiff", ".bmp",
          ".mov", ".mp4", ".m4v", ".avi", ".zip"}
-# Only these folders may hold images, and everything in them is drawn, not photographed.
-MEDIA_ALLOWED = ("docs/images/", "skills/exhibit/assets/")
+# Only these folders may hold images. docs/ and assets/ are drawn, not photographed.
+# showcase/ holds exhibitions their owner chose to publish, checked one by one with
+# personal details blacked out; its images must carry no camera data at all.
+MEDIA_ALLOWED = ("docs/images/", "skills/exhibit/assets/", "showcase/")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 EMAIL_OK = ("noreply@anthropic.com", "@users.noreply.github.com", "@example.com")
 for path in repo_files():
@@ -95,8 +97,11 @@ for path in repo_files():
         try:
             from PIL import Image
             with Image.open(path) as im:
-                if im.getexif().get_ifd(0x8825):
+                exif = im.getexif()
+                if exif.get_ifd(0x8825):
                     errors.append(f"{rel}: carries GPS location data; re-save it without camera data")
+                elif rel.startswith("showcase/") and len(exif):
+                    errors.append(f"{rel}: showcase images must carry no camera data at all")
         except Exception:
             pass
     if path.suffix == ".json":
@@ -108,6 +113,12 @@ for path in repo_files():
             for addr in EMAIL.findall(line):
                 if not any(ok in addr for ok in EMAIL_OK):
                     errors.append(f"{rel}:{n}: an email address ({addr}); leave personal contact details out")
+
+# Published galleries must load nothing from the internet either.
+for page in (ROOT / "showcase").rglob("index.html") if (ROOT / "showcase").exists() else []:
+    text = page.read_text(encoding="utf-8")
+    if re.findall(r'(?:src|srcset)="https?:|<link[^>]+href="https?:|url\(\s*["\']?https?:|@import|fetch\(|XMLHttpRequest|sendBeacon|new Image\(', text):
+        errors.append(f"{page.relative_to(ROOT)}: loads something from the internet")
 
 # No network, ever: the scripts must not be able to send anything anywhere.
 NETWORK = re.compile(r"^\s*(import|from)\s+(urllib|requests|http\.client|httpx|aiohttp|socket|ftplib|smtplib)\b", re.M)

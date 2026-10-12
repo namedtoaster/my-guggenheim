@@ -27,11 +27,16 @@ share buttons are ordinary links that do nothing until someone clicks one.
 
 ## This repository
 
-**This repository never holds anyone's photos or personal details**, the author's
-included. Exhibitions are made in a folder that git ignores, and every commit and every
+**This repository never holds your photos or personal details.** The one exception is
+the author's own exhibition in `showcase/`, which they chose to publish, with photos
+of faces left out and every name, number plate and personal detail blacked out.
+Exhibitions are made in a folder that git ignores, and every commit and every
 pull request is checked automatically. It is refused if it contains:
 
-- a photo, video or zip outside the folders of drawn demo images
+- a photo, video or zip outside the folders of drawn demo images and `showcase/`,
+  where an owner chose to publish their own exhibition with every face, name and
+  personal detail blacked out
+- any camera data in a showcase image
 - location data inside any image
 - a place or coordinates in any data file
 - an email address
