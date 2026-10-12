@@ -17,6 +17,7 @@ instead of carrying them inside, which suits hosting on GitHub Pages. No network
 
 import argparse
 import base64
+import datetime
 import html
 import io
 import re
@@ -97,9 +98,27 @@ def build_page(ex, manifest, srcs, thumbs):
     kicker = html.escape(ex.get("kicker") or "Collection in Focus")
     title = html.escape(ex["title"])
 
+    # Room panels: each timeline entry with a room_text opens a section of the
+    # gallery, the way a museum introduces each room before its works.
+    sections = {}
+    for g, entry in enumerate((ex.get("timeline") or {}).get("entries", []), 1):
+        if entry.get("room_text") and entry.get("works"):
+            first = next((w["id"] for w in ex["works"] if w["id"] in entry["works"]), None)
+            if first and first not in sections:
+                sections[first] = (g, entry)
+    year = datetime.date.today().year
+
     rooms = []
     for n, work in enumerate(ex["works"], 1):
         m = meta[work["id"]]
+        if work["id"] in sections:
+            g, entry = sections[work["id"]]
+            rooms.append(f"""
+<section class="section-panel">
+  <p class="kicker">Gallery {g}{' &middot; ' + html.escape(entry['when']) if entry.get('when') else ''}</p>
+  <h2>{inline(entry.get('heading', ''))}</h2>
+  {paragraphs(entry['room_text'])}
+</section>""")
         tomb = [f'<p class="artist">{artist_line}</p>',
                 f'<p class="work-title"><em>{html.escape(work["title"].replace("*", ""))}</em>'
                 + (f', {html.escape(work["date"])}' if work.get("date") else "") + "</p>"]
@@ -107,6 +126,7 @@ def build_page(ex, manifest, srcs, thumbs):
             tomb.append(f'<p>{html.escape(work["medium"])}</p>')
         tomb.append(f"<p>{dimensions(m)}</p>")
         tomb.append(f'<p>{html.escape(work.get("credit") or "Collection of the artist")}</p>')
+        tomb.append(f'<p class="acc">{html.escape(work.get("accession") or f"{year}.{n}")}</p>')
         rooms.append(f"""
 <section class="room {m['orientation']}" id="{html.escape(work['id'])}">
   <figure><img src="{srcs[work['id']]}" alt="{html.escape(work.get('alt') or work['title'])}"
@@ -176,12 +196,18 @@ body {{ margin: 0; background: var(--wall); color: var(--ink);
 h1 {{ color: var(--accent); font-size: clamp(40px, 7.4vw, 84px); line-height: 1.02; margin: 0 0 .6em; font-weight: 500; letter-spacing: -.02em; }}
 .panel p {{ font-size: clamp(17px, 2vw, 21px); margin: 0 0 1.1em; }}
 .byline {{ color: var(--soft); font-size: 15px !important; }}
-.room {{ display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: center;
+.room {{ display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 56px; align-items: start;
   min-height: 88vh; padding: 9vh 0; border-top: 1px solid var(--rule); }}
-.room.portrait {{ grid-template-columns: minmax(0, .8fr) 340px; }}
+.room.portrait {{ grid-template-columns: minmax(0, .85fr) 420px; }}
+figure {{ position: sticky; top: 6vh; }}
+.tombstone .acc {{ color: var(--soft); font-size: 13px; margin-top: .4em; }}
+.section-panel {{ border-top: 1px solid var(--rule); padding: 14vh 0 10vh; max-width: 760px; }}
+.section-panel h2 {{ color: var(--accent); font-size: clamp(30px, 4.6vw, 52px); font-weight: 500; margin: 0 0 .7em; letter-spacing: -.01em; }}
+.section-panel p {{ font-size: clamp(17px, 1.9vw, 20px); margin: 0 0 1em; }}
+.section-panel .kicker {{ font-size: 15px; color: var(--soft); letter-spacing: .04em; text-transform: uppercase; }}
 figure {{ margin: 0; display: flex; justify-content: center; }}
 figure img {{ max-width: 100%; max-height: 78vh; width: auto; height: auto; box-shadow: var(--shadow); background: #ccc; }}
-.label {{ font-size: 16px; }}
+.label {{ font-size: 16px; line-height: 1.6; padding-top: 2vh; }}
 .label .number {{ color: var(--soft); font-size: 13px; margin: 0 0 1em; }}
 .tombstone p {{ margin: 0; }}
 .tombstone .artist {{ font-weight: 600; }}
@@ -206,6 +232,7 @@ button {{ font: inherit; font-size: 15px; padding: .55em 1.1em; border-radius: 9
 button:hover {{ background: var(--ink); color: var(--wall); }}
 @media (max-width: 820px) {{
   .room, .room.portrait {{ grid-template-columns: minmax(0, 1fr); gap: 28px; min-height: 0; padding: 8vh 0; }}
+  figure {{ position: static; }}
   figure img {{ max-height: 72vh; }}
   body {{ font-size: 16px; }}
 }}

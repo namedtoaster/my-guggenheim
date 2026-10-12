@@ -77,7 +77,8 @@ Read [references/voice.md](references/voice.md) now, every time. Then decide:
 
 - **The order.** Date order by default, which makes the timeline the spine. A
   thematic order (all skies, then all food) is fine when the dates are thin.
-- **The periods.** Merge `suggested_periods` into 3 to 6 timeline entries.
+- **The periods.** Merge `suggested_periods` into 3 to 6 timeline entries. Each one
+  becomes a room in the gallery, opened by its `room_text` panel.
 - **The title and the accent color.** The accent defaults to wall title blue. Pick a
   color from a work's `palette` only if the show has a strong one.
 
@@ -99,7 +100,9 @@ hosting (see [references/sharing.md](references/sharing.md)).
 ## Step 6: Check your work
 
 Open `share/01-wall-text.png` and two of the work cards with your image reading tool.
-Text should end on whole sentences and nothing should overlap. If a title runs long,
+Text should end on whole sentences and nothing should overlap. Then count: every
+label 150 to 250 words, the wall text 350 to 500. Short labels are the most common
+way a show falls flat. If a title runs long,
 shorten it and rebuild. Make sure no label names an address, guesses who someone is,
 or comments on anyone's looks.
 

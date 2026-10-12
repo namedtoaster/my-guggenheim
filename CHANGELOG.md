@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 (2026-10-12)
+
+Labels that read like a modern museum.
+
+- Labels are now 150 to 250 words in two or three paragraphs: close looking, a real
+  art historical lineage, then context and a quiet turn. The intro wall is 350 to 500
+  words.
+- The voice guide has a table of touchstones (Paik, Hopper, Abbott, Duchamp, the Dutch
+  still life and more), each with the reason it fits, so comparisons stay accurate.
+- Room panels: each period of the timeline opens its own room in the gallery.
+- Accession numbers under each credit line, and labels that stay beside a photo that
+  holds still while you read.
+- The demo show is rewritten at the new length.
+
 ## 0.1.0 (2026-10-12)
 
 The first exhibition.

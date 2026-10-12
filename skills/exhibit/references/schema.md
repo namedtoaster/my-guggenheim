@@ -22,15 +22,16 @@ script checks it and says exactly what to fix.
       "date": "June 2019",
       "medium": "Digital photograph (iPhone 8)",
       "credit": "Collection of the artist",
-      "label": "60 to 110 words. Use a blank line for a second paragraph.",
-      "film_line": "Optional. One sentence for the video.",
+      "label": "150 to 250 words in two or three paragraphs, separated by blank lines.",
+      "film_line": "One sentence for the video. Write one for every work.",
+      "accession": "Optional. Defaults to the year and the work's number, like 2026.3",
       "alt": "Optional. A plain description for screen readers."
     }
   ],
   "timeline": {
     "title": "The Artist's Life",
     "entries": [
-      { "when": "2019", "heading": "Early Period", "text": "One to three sentences.", "works": ["img-parking-lot-sunset"] }
+      { "when": "2019", "heading": "Early Period", "text": "One to three sentences.", "room_text": "60 to 150 words opening this room in the gallery.", "works": ["img-parking-lot-sunset"] }
     ]
   },
   "visitor_note": "You do not have to read everything. Look at what you like. Get what you get.",
@@ -53,6 +54,8 @@ script checks it and says exactly what to fix.
 | `cover` | no | Work id for the story cover. Defaults to the first work |
 | `works[].date`, `medium`, `credit` | no | Credit defaults to "Collection of the artist". Dimensions come from the photo |
 | `timeline` | no | Leave it out for a show without dates. `works` in an entry shows thumbnails |
+| `timeline.entries[].room_text` | no | Opens a room in the gallery before that period's first work. Use it whenever the works hang in timeline order |
+| `works[].accession` | no | The small number under the credit line. Defaults to the year and position |
 | `visitor_note` | no | The closing line |
 | `share.caption`, `share.hashtags` | no | Written to `share/caption.txt`. `#MyGuggenheim` is always added |
 
