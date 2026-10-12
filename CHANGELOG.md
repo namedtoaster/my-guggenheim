@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.1 (2026-10-12)
+
+- Names that lead back to a person (their businesses, projects, apps, accounts,
+  handles, websites) are now treated like faces: blacked out in the image and kept out
+  of every text. The skill checks screenshots for them first.
+- The examples no longer use the author's name.
+
 ## 0.6.0 (2026-10-12)
 
 Nothing personal, ever, in the repo.

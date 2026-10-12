@@ -9,7 +9,7 @@ is shared with permission and signed with only the name its writer chose.
 
 ## The wall text that started it
 
-*Dave, October 2026*
+*The author, October 2026*
 
 I used to try to win at museums. Then, in front of a wall text at the Guggenheim, I
 noticed I wasn't trying anymore. I was reading what I could and getting what I got.

@@ -10,7 +10,7 @@ script checks it and says exactly what to fix.
   "kicker": "Collection in Focus",
   "title": "Late Suburban Currents",
   "accent": "#1868c4",
-  "artist": { "name": "Dave Campbell", "born": "1994" },
+  "artist": { "name": "A. Demo", "born": "1994" },
   "statement": [
     "First paragraph: the movement.",
     "Second paragraph: the concerns, with one sentence of gentle self-critique.",

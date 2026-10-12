@@ -121,13 +121,15 @@ or comments on anyone's looks.
 
 ### Black out personal details before sharing
 
-Look again at every photo for faces of other people, faces on screens, house
-numbers, street signs, number plates, names, addresses, phone numbers and
-documents. When the person plans to share the show, or asks for it, add a `redact`
+Look again at every photo, screenshots above all, for faces, faces on screens,
+house numbers, street signs, number plates, names, usernames and handles, the
+names of the person's own businesses, projects, apps or websites, addresses, phone
+numbers and documents. When the person plans to share the show, or asks for it, add a `redact`
 list to those works in `exhibition.json`: black boxes in the photo's own pixels, as
 it appears upright. The boxes are drawn into the page, every card and the film.
 Check each one by opening a crop of the result, and widen any box that leaves an
-edge showing. Say in the medium line that a detail was redacted for public display.
+edge showing. Say in the medium line that details were redacted for public display, and keep
+the same names out of the title, label, alt text, timeline and caption.
 
 Never copy a person's photos, or anything made from them, into a git repository.
 
