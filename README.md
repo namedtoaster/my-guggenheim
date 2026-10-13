@@ -19,6 +19,8 @@ pigeon. A screenshot from 11:58 p.m.
 
 ![Version](https://img.shields.io/badge/version-0.8.1-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-early-orange) ![Works with](https://img.shields.io/badge/works%20with-Claude-d97757) ![Privacy](https://img.shields.io/badge/your%20data-never%20collected-2e7d32)
 
+<p align="center"><img src="showcase/nothing-holds-still/preview/trailer.gif" alt="The trailer for Nothing Holds Still: a blurry dog, then on black, 'The searching, the museum suggests, may have been the point.' A carpet, then 'The artist looked, and then took a picture of it. That is not nothing. It may be most of it.' A fast montage of fifteen photos, then the title." width="300"></p>
+
 ![Cards from a real exhibition, Nothing Holds Still: the intro wall, four works and the timeline, on black walls](showcase/nothing-holds-still/preview/carousel.jpg)
 
 <p align="center"><b>See a real one:</b> <a href="showcase/nothing-holds-still/README.md"><i>Nothing Holds Still</i></a>, fifteen photos from one year, in the Existential mood.</p>
