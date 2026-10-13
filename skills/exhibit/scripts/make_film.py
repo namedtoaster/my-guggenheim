@@ -241,6 +241,48 @@ def render(scenes, W, H, emit):
             emit(frame)
 
 
+def encode(draw_all, total, W, H, share, stem, gif=False):
+    """Run draw_all(emit) and write every emitted frame to share/<stem>.mp4, or to a
+    half size GIF when ffmpeg is missing or gif is set. Returns the file written."""
+    share.mkdir(exist_ok=True)
+    ffmpeg = None if gif else find_ffmpeg()
+
+    if ffmpeg:
+        out = share / f"{stem}.mp4"
+        cmd = [ffmpeg, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
+               "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
+               "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(out)]
+        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+        count = [0]
+
+        def emit(frame):
+            proc.stdin.write(frame.tobytes())
+            count[0] += 1
+            if count[0] % (FPS * 5) == 0:
+                print(f"  {count[0] // FPS}s of {total // FPS}s", flush=True)
+
+        draw_all(emit)
+        proc.stdin.close()
+        if proc.wait() != 0:
+            sys.exit("ffmpeg could not write the video.")
+        return out
+
+    if not gif:
+        print("ffmpeg not found, so writing an animated GIF instead of an MP4.")
+    out = share / f"{stem}.gif"
+    frames = []
+    step = [0]
+
+    def emit(frame):
+        if step[0] % 3 == 0:  # 10 frames a second
+            frames.append(frame.resize((W // 2, H // 2), Image.BILINEAR).quantize(colors=128))
+        step[0] += 1
+
+    draw_all(emit)
+    frames[0].save(out, save_all=True, append_images=frames[1:], duration=100, loop=0, optimize=True)
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("exhibit")
@@ -270,43 +312,7 @@ def main():
     scenes.append(scene_end(ex, W, H, args.format))
     total = sum(f for _, _, f in scenes)
 
-    share = folder / "share"
-    share.mkdir(exist_ok=True)
-    ffmpeg = None if args.gif else find_ffmpeg()
-
-    if ffmpeg:
-        out = share / f"film-{args.format}.mp4"
-        cmd = [ffmpeg, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
-               "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
-               "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(out)]
-        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
-        count = [0]
-
-        def emit(frame):
-            proc.stdin.write(frame.tobytes())
-            count[0] += 1
-            if count[0] % (FPS * 5) == 0:
-                print(f"  {count[0] // FPS}s of {total // FPS}s", flush=True)
-
-        render(scenes, W, H, emit)
-        proc.stdin.close()
-        if proc.wait() != 0:
-            sys.exit("ffmpeg could not write the film.")
-    else:
-        if not args.gif:
-            print("ffmpeg not found, so writing an animated GIF instead of an MP4.")
-        out = share / f"film-{args.format}.gif"
-        frames = []
-        step = [0]
-
-        def emit(frame):
-            if step[0] % 3 == 0:  # 10 frames a second
-                frames.append(frame.resize((W // 2, H // 2), Image.BILINEAR).quantize(colors=128))
-            step[0] += 1
-
-        render(scenes, W, H, emit)
-        frames[0].save(out, save_all=True, append_images=frames[1:], duration=100, loop=0, optimize=True)
-
+    out = encode(lambda emit: render(scenes, W, H, emit), total, W, H, folder / "share", f"film-{args.format}", args.gif)
     print(f"Film: {out} ({total / FPS:.0f} seconds, {W}x{H})")
 
 

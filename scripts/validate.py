@@ -10,7 +10,7 @@
   - no long dashes (em or en) in Markdown, JSON or Python files git tracks
   - privacy: no personal photos, videos or zips outside the known folders, no
     location data in any image, no places in any manifest, no email addresses
-  - the demo photos build into a gallery, share cards and a film
+  - the demo photos build into a gallery, share cards, a film and a trailer
 
 Only the demo build writes files, all of them under examples/demo/ (ignored by git).
 """
@@ -136,6 +136,7 @@ if "--quick" not in sys.argv:
         [sys.executable, str(scripts / "inspect_photos.py"), str(demo / "photos"), "--out", str(demo)],
         [sys.executable, str(scripts / "build_gallery.py"), str(demo)],
         [sys.executable, str(scripts / "make_film.py"), str(demo), "--format", "square", "--seconds", "1.5", "--max-works", "3"],
+        [sys.executable, str(scripts / "make_trailer.py"), str(demo), "--format", "square", "--quotes", "2"],
     ]
     for step in steps:
         result = subprocess.run(step, capture_output=True, text=True)
@@ -158,6 +159,8 @@ if "--quick" not in sys.argv:
             errors.append("demo wall-texts.md is missing")
         if not list((demo / "share").glob("film-square.*")):
             errors.append("demo film was not written")
+        if not list((demo / "share").glob("trailer-square.*")):
+            errors.append("demo trailer was not written")
         if len(list((demo / "share").glob("*.png"))) < 8:
             errors.append("demo share cards are missing")
         # The same photos sent as a zip must come through with their dates.

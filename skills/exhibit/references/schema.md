@@ -36,6 +36,13 @@ script checks it and says exactly what to fix.
       { "when": "2019", "heading": "Early Period", "text": "One to three sentences.", "room_text": "60 to 150 words opening this room in the gallery.", "works": ["img-parking-lot-sunset"] }
     ]
   },
+  "trailer": {
+    "lines": [
+      { "work": "img-cold-coffee", "text": "The coffee was meant to be drunk. The picture was taken instead." }
+    ],
+    "cards": ["Six works.", "Eight years.", "One artist."],
+    "tagline": "Now on view."
+  },
   "visitor_note": "You do not have to read everything. Look at what you like. Get what you get.",
   "share": {
     "caption": "Now on view: Late Suburban Currents. Six works from the collection of the artist.",
@@ -61,6 +68,9 @@ script checks it and says exactly what to fix.
 | `timeline.entries[].room_text` | no | Opens a room in the gallery before that period's first work. Use it whenever the works hang in timeline order |
 | `works[].redact` | no | Black boxes over faces and personal details, as `[[left, top, right, bottom], ...]` in the photo's own upright pixels. Applied to the page, cards and film |
 | `works[].accession` | no | The small number under the credit line. Defaults to the year and position |
+| `trailer.lines` | no | For `make_trailer.py`: three to five lines, each 6 to 16 words, shown alone on black after its work's photo. Pick the ones that land hardest out of context, the tender or absurd ones, in hanging order. Without them the script picks from `film_line` and the labels |
+| `trailer.cards` | no | The short beats cut between the lines, like "Six works." Defaults to the number of works, the years they span and "One artist." |
+| `trailer.tagline` | no | The last card. Defaults to "Now on view." |
 | `visitor_note` | no | The closing line |
 | `share.caption`, `share.hashtags` | no | Written to `share/caption.txt`. `#MyGuggenheim` is always added |
 | `share.credit` | no | `false` removes the project line from the cards, film and caption. Leave it on unless asked |

@@ -90,6 +90,7 @@ npx skills add namedtoaster/my-guggenheim
 | `share/01-wall-text.png` ... | A carousel at 1080x1350: the intro wall, one card per work, the timeline |
 | `share/story-cover.png` | A 1080x1920 cover for Stories |
 | `share/film-vertical.mp4` | A 30 to 60 second film for Reels, TikTok and Shorts. Silent, so you pick the sound |
+| `share/trailer-vertical.mp4` | A 30 to 40 second trailer: the photos full frame, the best lines from the labels set large on black, a montage and the title. Made on request |
 | `share/caption.txt` | A caption with `#MyGuggenheim` and the link to make your own |
 | `share/wall-texts.md` | Every word of the show, to read anywhere without the photos |
 
@@ -170,6 +171,15 @@ server, no account, no analytics, no tracking.
 Read the whole promise, including what it can't cover, in [PRIVACY.md](PRIVACY.md).
 
 ## Want more motion?
+
+Ask for **a trailer**. It cuts the show like a film trailer: one line from a
+label at a time on black ("The coffee was meant to be drunk. The picture was
+taken instead."), cards like SIX WORKS. EIGHT YEARS. ONE ARTIST., a fast montage of
+every photo, then the title. Add a dramatic sound in the app you post from.
+
+```
+python3 skills/exhibit/scripts/make_trailer.py exhibits/your-show
+```
 
 The built in film works everywhere. For fancier motion design, the same
 `exhibition.json` can drive a [Remotion](https://www.remotion.dev) video in Claude

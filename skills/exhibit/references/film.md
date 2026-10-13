@@ -19,6 +19,29 @@ Every scene fades through the wall color.
 Each work shows its `film_line` when there is one, otherwise the opening of its
 label. Write `film_line` for the works where the label's best line comes last.
 
+## The trailer
+
+`scripts/make_trailer.py` cuts the same show like a film trailer, on black, 30 to 40
+seconds:
+
+1. A quiet card: FROM THE COLLECTION OF the artist.
+2. A photo, full frame and graded a little cooler, then one line from its label set
+   large on black. Three to five times, with beat cards between (SIX WORKS. EIGHT
+   YEARS. ONE ARTIST.).
+3. A montage of every work, faster and faster, cut on white flashes.
+4. Black, then the title, then the tagline and the credit.
+
+| Option | Default | |
+| --- | --- | --- |
+| `--format` | `vertical` | Same shapes as the film |
+| `--quotes` | `4` | How many lines from the labels |
+| `--gif` | off | Writes a half size GIF instead of an MP4 |
+
+The lines are the whole trailer. Write `trailer.lines` (see the schema) rather than
+leaving the script to guess: choose lines that make sense with no context and get
+funnier or sadder said slowly. Also silent: a low swelling sound with a hit near the
+end, picked in the app, suits it.
+
 ## More motion: Remotion
 
 For a film with more movement (type animation, photos sliding between walls, a

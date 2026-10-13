@@ -25,6 +25,8 @@ In an exhibit folder:
   without the photos.
 - `share/film-vertical.mp4`: a 30 to 60 second walk through the show for Reels,
   TikTok or Shorts.
+- `share/trailer-vertical.mp4`, when asked for a trailer or something more dramatic:
+  a 30 to 40 second cut like a film trailer, with the strongest lines from the labels.
 
 ## Before you start
 
@@ -105,7 +107,9 @@ python3 SKILL_DIR/scripts/build_gallery.py EXHIBIT
 python3 SKILL_DIR/scripts/make_film.py EXHIBIT
 ```
 
-If `build_gallery.py` lists problems, fix `exhibition.json` and run it again. The film
+If `build_gallery.py` lists problems, fix `exhibition.json` and run it again. If the person
+asks for a trailer, montage or something flashier, also write the `trailer` block
+(see the schema) and run `python3 SKILL_DIR/scripts/make_trailer.py EXHIBIT`. The film
 takes about a minute. Add `--format square` or `--format landscape` for other shapes,
 or `--seconds 3` for a quicker cut. Use `--linked` on the gallery for GitHub Pages
 hosting (see [references/sharing.md](references/sharing.md)).
